@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1f1f1f"><title>收藏 · Karounds 拓展</title><meta name="description" content="浏览 Karounds 拓展卡牌，按花费、类型和稀有度筛选。"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="official-ui.css"><link rel="stylesheet" href="card-detail.css"><script src="data.js" defer></script><script src="ui/icons.js" defer></script><script src="ui/nations.js" defer></script><script src="app.js" defer></script></head>
+<body>
+<header class="header"><a href="#collection" class="brand" aria-label="Karounds 拓展收藏首页"><b><img src="ui/kards-logo.svg" alt="KARDS"></b></a><nav aria-label="主导航"><a href="#collection" class="active" id="collectionNav">收藏</a><button id="favoritesNav">我的收藏 <span id="favoriteCount">0</span></button><button id="aboutNav">数据来源</button></nav><div class="header-right"><span class="expansion-label">Karounds 拓展</span><a class="official" href="https://www.kards.com/zh/decks/collection" target="_blank" rel="noopener"><span>官方网站</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12" stroke="currentColor" stroke-width="2"/></svg></a></div></header>
+<main id="collection">
+<section class="hero"><div class="hero-image" aria-hidden="true"></div><div class="hero-content"><h1>收藏</h1><p class="hero-tagline">卡牌</p></div><span class="collection-total" hidden><strong id="total">125</strong></span></section>
+<section class="workspace" aria-label="卡牌浏览器">
+<button class="mobile-filter-button outline-button" id="openFilters" aria-haspopup="dialog" aria-controls="filterDialog"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M3 6h18M6 12h12M9 18h6" stroke="currentColor" stroke-width="2"/></svg><span>筛选卡牌</span><span id="filterCount"></span></button>
+<div id="filterHome"><div class="filter-panel" id="filterPanel"><div class="filter-layout">
+<div class="filter-row filter-nation"><span class="filter-label">国家</span><div class="pills" id="nationFilters" role="group" aria-label="国家筛选"></div></div><div class="filter-row filter-cost"><span class="filter-label">花费</span><div class="pills" id="costFilters" role="group" aria-label="花费筛选"></div></div>
+<div class="filter-row filter-type"><span class="filter-label">类型</span><div class="pills" id="typeFilters" role="group" aria-label="类型筛选"></div></div>
+<div class="filter-row filter-rarity"><span class="filter-label">稀有度</span><div class="pills" id="rarityFilters" role="group" aria-label="稀有度筛选"></div></div>
+<div class="filter-row filter-search"><label class="filter-label" for="search">搜索</label><label class="search"><input id="search" type="search" placeholder="搜索卡牌" autocomplete="off" aria-label="搜索卡牌名称"><span class="search-icon" aria-hidden="true"></span></label></div>
+<div class="filter-row filter-other"><span class="filter-label">其他</span><button class="favorite-filter" id="favoriteFilter" aria-pressed="false">只看收藏</button></div>
+<div class="filter-row filter-role"><span class="filter-label">脱手性</span><div class="pills" id="roleFilters" role="group" aria-label="脱手性筛选"></div></div>
+</div><button class="mobile-filter-apply outline-button" id="applyFilters"><span>查看 <b id="mobileResultCount">125</b> 张卡牌</span></button></div></div>
+<div class="results-bar"><p aria-live="polite">找到 <strong id="resultCount">125</strong> 张卡牌<span id="allCount" hidden>125</span><span id="filteredHint" hidden></span></p><div class="active-filter-wrap"><div id="activeFilters" aria-label="已选筛选条件"></div><button id="reset" class="outline-button small-button"><span>清除筛选</span></button></div><label class="sort-label"><span class="sr-only">排序</span><select id="sort" aria-label="卡牌排序"><option value="cost-asc">花费从低到高</option><option value="cost-desc">花费从高到低</option><option value="rarity">稀有度</option><option value="name">名称</option></select></label></div>
+<div class="grid" id="grid"></div><div class="empty" id="empty" hidden><h2>没有找到卡牌</h2><button id="emptyReset" class="outline-button"><span>清除全部筛选</span></button></div>
+</section>
+<footer><a href="#collection" class="footer-logo"><img src="ui/kards-logo.svg" alt="KARDS" width="100" height="46"></a><div><b>Karounds 拓展</b><p>卡牌收藏</p></div><button id="sourceInfo">数据来源与说明</button><span>非官方卡牌浏览工具</span></footer>
+</main>
+<dialog id="filterDialog" aria-labelledby="filterDialogTitle"><button class="close" id="closeFilters" aria-label="关闭筛选">×</button><h2 id="filterDialogTitle">筛选卡牌</h2><div id="filterDialogBody"></div></dialog>
+<dialog id="detail" aria-labelledby="detailName"><button class="close" id="closeDetail" aria-label="关闭详情">×</button><div class="detail-layout"><div id="detailImage" class="detail-image"></div><div class="detail-copy"><p class="eyebrow" id="detailNation"></p><h2 id="detailName"></h2><div class="detail-sub" id="detailSub"></div><ul id="detailFields"></ul><button id="detailFavorite" class="outline-button detail-favorite"></button><div class="detail-nav"><button id="previous">← 上一张</button><span id="detailPosition"></span><button id="next">下一张 →</button></div></div></div></dialog>
+<dialog id="sourceDialog" aria-labelledby="sourceTitle"><button class="close" id="closeSource" aria-label="关闭来源说明">×</button><div class="source-copy"><p class="eyebrow">Karounds 拓展</p><h2 id="sourceTitle">关于这份收藏</h2><p>收录《中国拓展监察站.xls》“主界面”中的 125 张卡牌，不含废案。已按中国拓展目录同步于 2026-11-13。</p><p>名称、花费、类型与稀有度已按设计稿同步。新增卡牌的脱手性留空待定。详情中的词条、正文和行动花费来自同名 PSD，卡面来自同名 PNG。</p><p>这是本地浏览快照，表格修改后需要重新导入。收藏保存在当前浏览器中。</p><a href="https://www.kards.com/zh/decks/collection" target="_blank" rel="noopener">界面参照：KARDS 官方收藏 ↗</a></div></dialog>
+<div class="toast" id="toast" role="status" hidden></div>
+</body></html>
+
+
+
