@@ -1,8 +1,17 @@
 /* Restore official ViewCard breakpoints and keep touch controls inside the viewport. */
 #filterDialog { overscroll-behavior: contain; scroll-padding-block: 90px 35px; }
+#filterDialog .filter-layout {
+  width: 100%;
+  align-items: stretch;
+}
+#filterDialog .filter-row {
+  width: 100%;
+}
 #filterDialog #nationFilters {
+  display: grid;
   width: 100%;
   grid-template-columns: repeat(auto-fit, 40px);
+  justify-content: start;
   overflow: visible;
 }
 #filterDialog #costFilters {
