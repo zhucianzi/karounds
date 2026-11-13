@@ -60,7 +60,10 @@
   #collection .sort-label select { max-width: 130px; }
 }
 @media (hover: none), (pointer: coarse) {
-  .save-card { opacity: 1; width: 44px; height: 44px; font-size: 24px; }
+  .save-card { display: none; }
   .card-open:hover .card-visual { transform: scale(1.0001); }
   #detail .detail-nav button { min-height: 44px; }
+}
+@media (max-width: 719px) {
+  #collection .save-card { display: none; }
 }

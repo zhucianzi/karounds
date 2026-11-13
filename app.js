@@ -7,10 +7,7 @@ const officialIcons = {...window.OFFICIAL_ICONS, ...window.NATION_ICONS};
 const rarityNames = {金:'精英',银:'特殊',铜:'限定',铁:'基础'};
 const rarityClasses = {金:'gold',银:'silver',铜:'bronze',铁:'iron'};
 const rarityOrder = {金:4,银:3,铜:2,铁:1};
-const state = {nation:'',cost:'',type:'',rarity:'',role:'',query:'',sort:'cost-asc',favorites:false};
-let saved = new Set();
-let storageAvailable = true;
-try { const raw = JSON.parse(localStorage.getItem('china-collection-favorites-v1') || '[]'); if(!Array.isArray(raw)) throw new Error('Invalid favorites'); saved = new Set(raw.filter(id=>cards.some(c=>c.id===id))); } catch { storageAvailable=false; }
+const state = {nation:'',cost:'',type:'',rarity:'',role:'',query:'',sort:'cost-asc'};
 let visible = cards.slice(), currentId = null, lastFocus = null, toastTimer;
 let referenceTrail = [], detailRootId = null;
 let activePage = null;
@@ -31,8 +28,7 @@ function filterCards(list, filters) {
   (!types.length || types.includes(card.unitType || card.type)) &&
   (!rarities.length || rarities.includes(card.rarity)) &&
   (!roles.length || roles.includes(card.role)) &&
-  (!filters.query || card.name.toLocaleLowerCase().includes(filters.query.toLocaleLowerCase())) &&
-  (!filters.favorites || saved.has(card.id))
+  (!filters.query || card.name.toLocaleLowerCase().includes(filters.query.toLocaleLowerCase()))
  );
 }
 function toggleFilter(key,value){const values=selections(state[key]);state[key]=values.includes(value)?values.filter(v=>v!==value).join(','):[...values,value].join(',');render();}
@@ -72,9 +68,8 @@ function render(){
  if(state.sort==='cost-desc')visible.sort((a,b)=>b.cost-a.cost||a.row-b.row);
  if(state.sort==='rarity')visible.sort((a,b)=>rarityOrder[b.rarity]-rarityOrder[a.rarity]||a.cost-b.cost);
  if(state.sort==='name')visible.sort((a,b)=>a.name.localeCompare(b.name,'zh-CN'));
- $('grid').innerHTML=visible.map(c=>`<article class="card"><button class="card-open" data-open="${c.id}" aria-label="查看${esc(c.name)}详情"><span class="card-visual">${visual(c)}</span><span class="card-caption"><strong>${esc(c.name)}</strong><small>${esc(c.costText)}</small></span></button><button class="save-card" data-save="${c.id}" aria-pressed="${saved.has(c.id)}" aria-label="${saved.has(c.id)?'取消收藏':'收藏'}${esc(c.name)}">${saved.has(c.id)?'★':'☆'}</button></article>`).join('');
- $('resultCount').textContent=visible.length;$('total').textContent=cards.length;$('allCount').textContent=cards.length;$('favoriteCount').textContent=saved.size;$('empty').hidden=visible.length>0;
- $('favoriteFilter').setAttribute('aria-pressed',state.favorites);
+ $('grid').innerHTML=visible.map(c=>`<article class="card"><button class="card-open" data-open="${c.id}" aria-label="查看${esc(c.name)}详情"><span class="card-visual">${visual(c)}</span><span class="card-caption"><strong>${esc(c.name)}</strong><small>${esc(c.costText)}</small></span></button></article>`).join('');
+ $('resultCount').textContent=visible.length;$('total').textContent=cards.length;$('allCount').textContent=cards.length;$('empty').hidden=visible.length>0;
  document.querySelectorAll('.pill').forEach(button => {
   const selected = selections(state[button.dataset.key]).includes(button.dataset.value);
   button.classList.toggle('selected', selected);
@@ -84,14 +79,11 @@ function render(){
  const tags=[];
  for(const key of ['nation','cost','type','rarity','role'])for(const value of selections(state[key]))tags.push({key,value,label:key==='cost'?'花费：'+(value==='7'?'7+':value):key==='rarity'?value+'卡':value});
  if(state.query)tags.push({key:'query',value:state.query,label:state.query});
- if(state.favorites)tags.push({key:'favorites',value:'true',label:'只看收藏'});
  $('activeFilters').innerHTML=tags.map(t=>`<button class="filter-tag" data-remove-key="${t.key}" data-remove-value="${esc(t.value)}" aria-label="移除筛选：${esc(t.label)}">${esc(t.label)}</button>`).join('');
  $('reset').hidden=tags.length===0;$('filterCount').textContent=tags.length||'';$('mobileResultCount').textContent=visible.length;
  window.scrollReveal?.refresh();
 }
-function reset(){Object.assign(state,{nation:'',cost:'',type:'',rarity:'',role:'',query:'',sort:'cost-asc',favorites:false});$('search').value='';$('sort').value='cost-asc';render();}
-function toggleSave(id){if(!storageAvailable){toast('浏览器存储不可用，暂时无法保存收藏');return;}const updated=new Set(saved);updated.has(id)?updated.delete(id):updated.add(id);try{localStorage.setItem('china-collection-favorites-v1',JSON.stringify([...updated]));saved=updated;}catch{toast('收藏保存失败，请检查浏览器存储空间');return;}render();if(currentId)updateDetailFavorite();}
-function updateDetailFavorite(){$('detailFavorite').textContent=saved.has(currentId)?'★ 已收藏 · 点击取消':'☆ 收藏这张卡牌';$('detailFavorite').setAttribute('aria-pressed',saved.has(currentId));}
+function reset(){Object.assign(state,{nation:'',cost:'',type:'',rarity:'',role:'',query:'',sort:'cost-asc'});$('search').value='';$('sort').value='cost-asc';render();}
 function showDetail(id, keepTrail = false) {
  const card = detailCards.get(id);
  if (!card) return;
@@ -119,8 +111,6 @@ function showDetail(id, keepTrail = false) {
  $('previous').disabled = position <= 0;
  $('next').disabled = position < 0 || position >= visible.length - 1;
  for (const id of ['previous', 'next', 'detailPosition']) $(id).hidden = !$('intelligence').hidden;
- updateDetailFavorite();
- $('detailFavorite').hidden = !cards.some(item => item.id === id);
  $('detailBack').hidden = referenceTrail.length === 0;
  $('detailBack').textContent = referenceTrail.length ? `← 返回${detailCards.get(referenceTrail.at(-1)).name}` : '';
  $('detail').scrollTop = 0;
@@ -234,10 +224,10 @@ function renderIntelligenceCards() {
   });
  }
 }
-$('grid').addEventListener('click',e=>{const save=e.target.closest('[data-save]');if(save){toggleSave(save.dataset.save);return;}const open=e.target.closest('[data-open]');if(open)showDetail(open.dataset.open);});
+$('grid').addEventListener('click',e=>{const open=e.target.closest('[data-open]');if(open)showDetail(open.dataset.open);});
 $('grid').addEventListener('error',e=>{if(e.target.tagName==='IMG'){const c=cards.find(c=>c.image===e.target.getAttribute('src')||Object.values(c.previews||{}).includes(e.target.getAttribute('src')));e.target.replaceWith(Object.assign(document.createElement('span'),{className:'missing-card',textContent:`${c?.name||'卡面'}：图片加载失败，请刷新重试`}));}},true);
-$('search').addEventListener('input',e=>{state.query=e.target.value.trim();render();});$('sort').addEventListener('change',e=>{state.sort=e.target.value;render();});$('favoriteFilter').addEventListener('click',()=>{state.favorites=!state.favorites;render();});$('favoritesNav').addEventListener('click',()=>{state.favorites=true;render();pageScroll.collection=0;navigatePage('collection');window.scrollTo({top:0,behavior:'instant'});});$('reset').addEventListener('click',reset);$('emptyReset').addEventListener('click',reset);$('closeDetail').addEventListener('click',()=>$('detail').close());$('detailFavorite').addEventListener('click',()=>toggleSave(currentId));$('previous').addEventListener('click',()=>moveDetail(-1));$('next').addEventListener('click',()=>moveDetail(1));$('detail').addEventListener('close',()=>{const id=detailRootId;currentId=null;referenceTrail=[];detailRootId=null;const target=document.querySelector(`[data-open="${id}"]`);(($('intelligence').hidden?target:null)||lastFocus||$('search')).focus();});
-$('activeFilters').addEventListener('click',e=>{const tag=e.target.closest('[data-remove-key]');if(!tag)return;const key=tag.dataset.removeKey;if(key==='query'){state.query='';$('search').value='';render();}else if(key==='favorites'){state.favorites=false;render();}else toggleFilter(key,tag.dataset.removeValue);});
+$('search').addEventListener('input',e=>{state.query=e.target.value.trim();render();});$('sort').addEventListener('change',e=>{state.sort=e.target.value;render();});$('reset').addEventListener('click',reset);$('emptyReset').addEventListener('click',reset);$('closeDetail').addEventListener('click',()=>$('detail').close());$('previous').addEventListener('click',()=>moveDetail(-1));$('next').addEventListener('click',()=>moveDetail(1));$('detail').addEventListener('close',()=>{const id=detailRootId;currentId=null;referenceTrail=[];detailRootId=null;const target=document.querySelector(`[data-open="${id}"]`);(($('intelligence').hidden?target:null)||lastFocus||$('search')).focus();});
+$('activeFilters').addEventListener('click',e=>{const tag=e.target.closest('[data-remove-key]');if(!tag)return;const key=tag.dataset.removeKey;if(key==='query'){state.query='';$('search').value='';render();}else toggleFilter(key,tag.dataset.removeValue);});
 $('intelligenceNav').addEventListener('click',event=>navigatePage('intelligence',event));
 $('collectionNav').addEventListener('click',event=>navigatePage('collection',event));
 for (const link of document.querySelectorAll('a[href="#collection"]:not(#collectionNav)')) link.addEventListener('click',event=>navigatePage('collection',event));
