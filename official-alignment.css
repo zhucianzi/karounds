@@ -1,0 +1,110 @@
+/* Shared geometry from Header, Hero, DecksWrap, FilterBar and CardGrid. */
+:root {
+  --official-gutter: clamp(25px, calc(25px + 1.5 * (100vw - 600px) / 68), 40px);
+}
+body { overflow-x: clip; }
+#collection {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: url('ui/intel-paper3.png') 60% -10vh no-repeat,
+    url('ui/intel-paper2.png') 40% 2340px no-repeat,
+    url('ui/intel-bg.jpg') 0 0 repeat #1f1f1f;
+}
+.header {
+  height: 70px;
+  padding: 0 var(--official-gutter);
+  gap: 20px;
+  background: transparent;
+  z-index: 20;
+}
+.header::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: 70px;
+  background: linear-gradient(180deg, #0009, transparent);
+  pointer-events: none;
+  z-index: -1;
+}
+.header .brand { flex: 0 0 75px; width: 75px; margin: 0; }
+.header .brand b { display: block; }
+.header .brand img { display: block; width: 100%; height: 65px; object-fit: contain; }
+.header nav { gap: 16px; }
+.header nav a, .header nav button {
+  font-family: Oswald, "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+@media (min-width: 375px) {
+  .header .brand { flex-basis: 80px; width: 80px; }
+}
+@media (min-width: 600px) {
+  .header, .header::before { height: 80px; }
+  .header .brand { flex-basis: 90px; width: 90px; }
+  .header nav { gap: 20px; }
+  .header nav a, .header nav button { font-size: 16px; }
+}
+@media (min-width: 720px) {
+  .header, .header::before { height: 117px; }
+  .header .brand { flex-basis: 123px; width: 123px; }
+  .header nav a, .header nav button { font-size: 18px; }
+}
+@media (min-width: 1080px) {
+  .header { gap: 40px; }
+  .header .brand { flex-basis: 143px; width: 143px; }
+}
+@media (min-width: 1280px) {
+  .header { gap: 80px; }
+  .header nav { gap: 40px; }
+}
+#collection .filter-panel { padding: 21px 20px 20px; margin-bottom: 30px; }
+#collection .filter-layout { column-gap: 30px; row-gap: 20px; }
+#collection .filter-label, #collection .search input, .sort-label select {
+  font-family: Oswald, "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+#collection .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+@media (min-width: 720px) {
+  #collection .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; }
+}
+@media (min-width: 1080px) {
+  #collection .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+@media (max-width: 1079px) {
+  #collection #filterHome > .filter-panel { display: none; }
+  #collection .mobile-filter-button { display: inline-flex; height: 40px; font-size: 14px; }
+  #collection .results-bar { padding-top: 15px; }
+}
+#filterDialog {
+  position: fixed;
+  inset: 0 0 0 auto;
+  width: min(500px, 95vw);
+  max-width: none;
+  height: 100dvh;
+  max-height: 100dvh;
+  margin: 0;
+  padding: 100px 25px 35px;
+}
+#filterDialog::backdrop { background: #0008; backdrop-filter: blur(5px); }
+.site-footer {
+  display: block;
+  width: 100%;
+  margin: 100px 0 0;
+  padding: clamp(60px, calc(60px + 7 * (100vw - 480px) / 80), 130px) var(--official-gutter) 65px;
+  background: #181818;
+  border: 0;
+}
+.site-footer .site-footer-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 35px;
+  max-width: 1290px;
+  margin: 0 auto;
+}
+@media (max-width: 599px) {
+  .site-footer { padding-block: 25px 35px; }
+  .site-footer .site-footer-inner { gap: 25px; }
+}

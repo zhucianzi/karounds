@@ -176,6 +176,40 @@ h1 {
   font-weight: 700;
   margin-right: .6em;
 }
+.reference-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding-top: 20px;
+}
+.reference-card {
+  display: block;
+  flex: 0 1 150px;
+  width: 150px;
+  max-width: calc(50% - 10px);
+  margin: 0 0 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  transition: transform .2s ease;
+}
+.reference-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.reference-card:hover {
+  transform: translateY(-4px);
+}
+.reference-card:focus-visible {
+  outline: 2px solid #dba122;
+  outline-offset: 4px;
+}
+#detailBack {
+  flex-basis: 100%;
+  text-align: left;
+}
 #detail .detail-favorite {
   height: 50px;
   margin-bottom: 30px;

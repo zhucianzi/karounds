@@ -1,0 +1,81 @@
+/* PageLayout paper textures and card styling from the official saved reference. */
+#intelligence.intelligence-page {
+  /* The official inner containers supply gutters; the page itself spans the viewport. */
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 0 100px;
+  background-color: #1f1f1f;
+  background-image: url('ui/intel-paper3.png'), url('ui/intel-paper2.png'), url('ui/intel-bg.jpg');
+  background-repeat: no-repeat, no-repeat, repeat;
+  background-position: 60% -10vh, 40% 2340px, 0 0;
+  overflow: visible;
+}
+body[data-page="intelligence"] { overflow-x: clip; }
+.intel-copy {
+  font-family: "Open Sans", "Microsoft YaHei", "PingFang SC", sans-serif;
+  font-style: normal;
+  letter-spacing: normal;
+}
+.intel-body > p, .intel-copy li {
+  padding: 0;
+  letter-spacing: .04em;
+  margin: 0 0 1em;
+  font-size: clamp(18px, calc(18px + 2 * (100vw - 480px) / 800), 20px);
+  font-weight: 400;
+  line-height: 1.65;
+}
+.intel-copy strong { font-weight: 700; }
+.intel-body > p:last-child { margin-bottom: 0; }
+.intel-copy ul { padding: 0; margin: 0 0 1.25em; list-style: none; }
+.intel-copy li { position: relative; padding-left: 36px; }
+.intel-copy li::before {
+  content: ""; position: absolute; top: .9em; left: 0;
+  width: 16px; height: 2px; background: #ebebdc;
+}
+.intel-fan {
+  position: relative;
+  aspect-ratio: 5 / 4;
+  isolation: isolate;
+}
+.intel-card {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--card-width, 45%);
+  padding: 0;
+  background: transparent;
+  border: 0;
+  transform: translate(var(--card-x, 0px), var(--card-y, 0px)) rotate(var(--card-angle, 0deg));
+  transform-origin: var(--card-origin, 50% 50%);
+  z-index: var(--card-layer, 1);
+}
+.intel-card-inner {
+  display: block;
+  border-radius: 3.5% / 2.8%;
+  box-shadow: 0 0 10px 5px #0008;
+  transform: scale(1.0001);
+  transition: transform .1s ease;
+}
+.intel-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+@media (hover: hover) {
+  .intel-card:hover .intel-card-inner { transform: scale(1.025); }
+}
+.intel-card:focus-visible { outline: none; }
+.intel-card:focus-visible .intel-card-inner {
+  transform: scale(1.025);
+  outline: 2px solid #dba122;
+  outline-offset: 5px;
+}
+
+body[data-page="intelligence"] > footer { margin-top: 0; }
+@media (max-width: 650px) {
+  .header { gap: 18px; }
+  .header nav { gap: 16px; }
+  .header nav a, .header nav button { white-space: nowrap; }
+}

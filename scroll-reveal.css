@@ -1,0 +1,21 @@
+.scroll-reveal {
+  opacity: 0;
+  transform: translate3d(0, 25px, 0);
+  transition: opacity .75s cubic-bezier(.165,.84,.44,1) var(--reveal-delay, 0s),
+    transform .75s cubic-bezier(.165,.84,.44,1) var(--reveal-delay, 0s);
+}
+.scroll-reveal.is-revealed { opacity: 1; transform: none; }
+/* Short mechanism copy needs less vertical space than the reference's long tutorial. */
+#intelligence .intel-section {
+  --segment-padding-top: clamp(30px, 4.5vw, 60px);
+  --segment-padding-bottom: clamp(40px, 5vw, 70px);
+}
+#intelligence .ImageBlock_top__kGstN .ImageBlock_block__container__aKYa3 { padding-top: 0; }
+#intelligence .ImageBlock_top__kGstN .ImageBlock_block__imageCol__SYdaV { align-self: center; margin-top: 0; }
+#intelligence .intel-copy h2 { margin-bottom: .7em; }
+.intel-body > p, .intel-body li { line-height: 1.65; }
+#collection .filter-panel { margin-bottom: 15px; }
+#collection .results-bar { padding-block: 15px 25px; min-height: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal { opacity: 1; transform: none; transition: none; }
+}

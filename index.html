@@ -1,11 +1,14 @@
 <!doctype html>
 <html lang="zh-CN">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1f1f1f"><title>收藏 · Karounds 拓展</title><meta name="description" content="浏览 Karounds 拓展卡牌，按花费、类型和稀有度筛选。"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="official-ui.css"><link rel="stylesheet" href="card-detail.css"><script src="data.js" defer></script><script src="ui/icons.js" defer></script><script src="ui/nations.js" defer></script><script src="app.js" defer></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#1f1f1f"><title>收藏 · Karounds 拓展</title><meta name="description" content="浏览 Karounds 拓展卡牌，按花费、类型和稀有度筛选。"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="official-ui.css"><link rel="stylesheet" href="card-detail.css"><link rel="stylesheet" href="intelligence.css"><link rel="stylesheet" href="intelligence-layout.css"><link rel="stylesheet" href="official-alignment.css"><link rel="stylesheet" href="scroll-reveal.css"><link rel="stylesheet" href="responsive-ui.css"><script src="data.js" defer></script><script src="ui/icons.js" defer></script><script src="ui/nations.js" defer></script><script src="app.js" defer></script><script src="scroll-reveal.js" defer></script></head>
 <body>
-<header class="header"><a href="#collection" class="brand" aria-label="Karounds 拓展收藏首页"><b><img src="ui/kards-logo.svg" alt="KARDS"></b></a><nav aria-label="主导航"><a href="#collection" class="active" id="collectionNav">收藏</a><button id="favoritesNav">我的收藏 <span id="favoriteCount">0</span></button><button id="aboutNav">数据来源</button></nav><div class="header-right"><span class="expansion-label">Karounds 拓展</span><a class="official" href="https://www.kards.com/zh/decks/collection" target="_blank" rel="noopener"><span>官方网站</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12" stroke="currentColor" stroke-width="2"/></svg></a></div></header>
+<header class="header"><a href="#collection" class="brand" aria-label="Karounds 拓展收藏首页"><b><img src="ui/kards-logo.svg" alt="KARDS"></b></a><nav aria-label="主导航"><a href="#collection" class="active" id="collectionNav">收藏</a><a href="#intelligence" id="intelligenceNav">情报</a><button id="favoritesNav">我的收藏 <span id="favoriteCount">0</span></button></nav><div class="header-right"><span class="expansion-label">Karounds 拓展</span><a class="official" href="https://www.kards.com/zh/decks/collection" target="_blank" rel="noopener"><span>官方网站</span><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12" stroke="currentColor" stroke-width="2"/></svg></a></div></header>
 <main id="collection">
-<section class="hero"><div class="hero-image" aria-hidden="true"></div><div class="hero-content"><h1>收藏</h1><p class="hero-tagline">卡牌</p></div><span class="collection-total" hidden><strong id="total">125</strong></span></section>
-<section class="workspace" aria-label="卡牌浏览器">
+<section class="collection-hero Hero_hero__njbMM">
+<div class="Hero_hero__image__M84id"><img class="Hero_hero__img__cBkxX" src="ui/collection-hero.jpg" width="1920" height="610" alt="" decoding="async"></div>
+<div class="Hero_hero__container__qcbpG"><div class="Hero_hero__content__XPEV9"><div class="Hero_hero__text__L7wZo"><h1 class="Hero_hero__title__Np1AF">收藏</h1><p class="Hero_hero__tagline__n8GKk">卡牌</p></div></div></div>
+<span class="collection-total" hidden><strong id="total">125</strong></span></section>
+<section class="DecksWrap_decks__NDypD"><div class="workspace DecksWrap_decks__container__Y1uyR" aria-label="卡牌浏览器">
 <button class="mobile-filter-button outline-button" id="openFilters" aria-haspopup="dialog" aria-controls="filterDialog"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><path d="M3 6h18M6 12h12M9 18h6" stroke="currentColor" stroke-width="2"/></svg><span>筛选卡牌</span><span id="filterCount"></span></button>
 <div id="filterHome"><div class="filter-panel" id="filterPanel"><div class="filter-layout">
 <div class="filter-row filter-nation"><span class="filter-label">国家</span><div class="pills" id="nationFilters" role="group" aria-label="国家筛选"></div></div><div class="filter-row filter-cost"><span class="filter-label">花费</span><div class="pills" id="costFilters" role="group" aria-label="花费筛选"></div></div>
@@ -17,12 +20,62 @@
 </div><button class="mobile-filter-apply outline-button" id="applyFilters"><span>查看 <b id="mobileResultCount">125</b> 张卡牌</span></button></div></div>
 <div class="results-bar"><p aria-live="polite">找到 <strong id="resultCount">125</strong> 张卡牌<span id="allCount" hidden>125</span><span id="filteredHint" hidden></span></p><div class="active-filter-wrap"><div id="activeFilters" aria-label="已选筛选条件"></div><button id="reset" class="outline-button small-button"><span>清除筛选</span></button></div><label class="sort-label"><span class="sr-only">排序</span><select id="sort" aria-label="卡牌排序"><option value="cost-asc">花费从低到高</option><option value="cost-desc">花费从高到低</option><option value="rarity">稀有度</option><option value="name">名称</option></select></label></div>
 <div class="grid" id="grid"></div><div class="empty" id="empty" hidden><h2>没有找到卡牌</h2><button id="emptyReset" class="outline-button"><span>清除全部筛选</span></button></div>
-</section>
-<footer><a href="#collection" class="footer-logo"><img src="ui/kards-logo.svg" alt="KARDS" width="100" height="46"></a><div><b>Karounds 拓展</b><p>卡牌收藏</p></div><button id="sourceInfo">数据来源与说明</button><span>非官方卡牌浏览工具</span></footer>
+</div></section>
+
 </main>
+
+<main id="intelligence" class="intelligence-page" hidden aria-labelledby="intelligenceTitle">
+<section class="intel-intro Hero_hero__njbMM">
+  <div class="Hero_hero__image__M84id"><img class="Hero_hero__img__cBkxX" src="ui/intelligence-hero.jpg" width="1920" height="610" alt="" decoding="async"></div>
+  <div class="Hero_hero__container__qcbpG"><div class="Hero_hero__content__XPEV9"><div class="Hero_hero__text__L7wZo">
+    <h1 class="Hero_hero__title__Np1AF" id="intelligenceTitle" tabindex="-1">情报</h1>
+    <p class="Hero_hero__tagline__n8GKk">特色内容</p>
+  </div></div></div>
+</section>
+<section class="intel-section ImageBlock_block__2z4at ImageBlock_behind__r4ZPt ImageBlock_middle__kCLgS ImageBlock_box__dSGJq ImageBlock_relative__WorPC" aria-labelledby="policyTitle">
+  <div class="ImageBlock_block__segment__SkQ1P"><div class="ImageBlock_block__container__aKYa3">
+    <div class="ImageBlock_block__row__j4egy"><div class="ImageBlock_block__col__gQgsF"><div class="ImageBlock_block__layout__ZgEZN">
+      <div class="ImageBlock_block__contentCol__pYH_w"><div class="intel-copy ImageBlock_block__content__aJdqd">
+        <h2 class="ImageBlock_block__title__lobvY" id="policyTitle">国策</h2>
+        <div class="intel-body"><p>国策卡会使友方总部获得一项永久生效的<strong>能力</strong>。</p><p>等效于“使友方总部获得: ...”。</p></div>
+      </div></div>
+      <div class="ImageBlock_block__imageCol__SYdaV"><div class="ImageBlock_block__image__8n3cc">
+        <div class="intel-fan" id="policyCards" data-align="right" role="group" aria-label="国策卡牌"></div>
+      </div></div>
+    </div></div></div>
+  </div></div>
+</section>
+<section class="intel-section ImageBlock_block__2z4at ImageBlock_behind__r4ZPt ImageBlock_top__kGstN ImageBlock_reverse__nDSFP ImageBlock_box__dSGJq ImageBlock_relative__WorPC" aria-labelledby="tongpaoTitle">
+  <div class="ImageBlock_block__segment__SkQ1P"><div class="ImageBlock_block__container__aKYa3">
+    <div class="ImageBlock_block__row__j4egy"><div class="ImageBlock_block__col__gQgsF"><div class="ImageBlock_block__layout__ZgEZN">
+      <div class="ImageBlock_block__contentCol__pYH_w"><div class="intel-copy ImageBlock_block__content__aJdqd">
+        <h2 class="ImageBlock_block__title__lobvY" id="tongpaoTitle">同袍</h2>
+        <div class="intel-body"><p>若本局友方构筑中与构筑外的此牌合计不少于 X 张，则该效果生效。</p></div>
+      </div></div>
+      <div class="ImageBlock_block__imageCol__SYdaV"><div class="ImageBlock_block__image__8n3cc">
+        <div class="intel-fan" id="tongpaoCards" data-align="left" role="group" aria-label="同袍卡牌"></div>
+      </div></div>
+    </div></div></div>
+  </div></div>
+</section>
+<section class="intel-section ImageBlock_block__2z4at ImageBlock_behind__r4ZPt ImageBlock_middle__kCLgS ImageBlock_box__dSGJq ImageBlock_relative__WorPC" aria-labelledby="aidTitle">
+  <div class="ImageBlock_block__segment__SkQ1P"><div class="ImageBlock_block__container__aKYa3">
+    <div class="ImageBlock_block__row__j4egy"><div class="ImageBlock_block__col__gQgsF"><div class="ImageBlock_block__layout__ZgEZN">
+      <div class="ImageBlock_block__contentCol__pYH_w"><div class="intel-copy ImageBlock_block__content__aJdqd">
+        <h2 class="ImageBlock_block__title__lobvY" id="aidTitle">援助</h2>
+        <div class="intel-body"><p>援助牌在属于援助国的同时，也可以投入受援国的构筑。</p><p>它与<strong>流亡</strong>的游戏意义相同。</p></div>
+      </div></div>
+      <div class="ImageBlock_block__imageCol__SYdaV"><div class="ImageBlock_block__image__8n3cc">
+        <div class="intel-fan" id="aidCards" data-align="right" role="group" aria-label="援助卡牌"></div>
+      </div></div>
+    </div></div></div>
+  </div></div>
+</section>
+</main>
+<footer class="site-footer"><div class="site-footer-inner"><a href="#collection" class="footer-logo"><img src="ui/kards-logo.svg" alt="KARDS" width="100" height="46"></a><div><b>Karounds 拓展</b><p>卡牌收藏</p></div><span>非官方卡牌浏览工具</span></div></footer>
 <dialog id="filterDialog" aria-labelledby="filterDialogTitle"><button class="close" id="closeFilters" aria-label="关闭筛选">×</button><h2 id="filterDialogTitle">筛选卡牌</h2><div id="filterDialogBody"></div></dialog>
-<dialog id="detail" aria-labelledby="detailName"><button class="close" id="closeDetail" aria-label="关闭详情">×</button><div class="detail-layout"><div id="detailImage" class="detail-image"></div><div class="detail-copy"><p class="eyebrow" id="detailNation"></p><h2 id="detailName"></h2><div class="detail-sub" id="detailSub"></div><ul id="detailFields"></ul><button id="detailFavorite" class="outline-button detail-favorite"></button><div class="detail-nav"><button id="previous">← 上一张</button><span id="detailPosition"></span><button id="next">下一张 →</button></div></div></div></dialog>
-<dialog id="sourceDialog" aria-labelledby="sourceTitle"><button class="close" id="closeSource" aria-label="关闭来源说明">×</button><div class="source-copy"><p class="eyebrow">Karounds 拓展</p><h2 id="sourceTitle">关于这份收藏</h2><p>收录《中国拓展监察站.xls》“主界面”中的 125 张卡牌，不含废案。已按中国拓展目录同步于 2026-11-13。</p><p>名称、花费、类型与稀有度已按设计稿同步。新增卡牌的脱手性留空待定。详情中的词条、正文和行动花费来自同名 PSD，卡面来自同名 PNG。</p><p>这是本地浏览快照，表格修改后需要重新导入。收藏保存在当前浏览器中。</p><a href="https://www.kards.com/zh/decks/collection" target="_blank" rel="noopener">界面参照：KARDS 官方收藏 ↗</a></div></dialog>
+<dialog id="detail" aria-labelledby="detailName"><button class="close" id="closeDetail" aria-label="关闭详情">×</button><div class="detail-layout"><div id="detailImage" class="detail-image"></div><div class="detail-copy"><p class="eyebrow" id="detailNation"></p><h2 id="detailName"></h2><div class="detail-sub" id="detailSub"></div><ul id="detailFields"></ul><button id="detailFavorite" class="outline-button detail-favorite"></button><div class="detail-nav"><button id="detailBack" hidden></button><button id="previous">← 上一张</button><span id="detailPosition"></span><button id="next">下一张 →</button></div></div></div></dialog>
+
 <div class="toast" id="toast" role="status" hidden></div>
 </body></html>
 
