@@ -1,7 +1,9 @@
-/* Data stays a faithful snapshot of the source sheet. */
-const cards = window.CARD_DATA.cards;
+/* UID identities and card fields come from the confirmed hub projection. */
+const allCards = window.CARD_DATA.cards;
+const cards = allCards.filter(card => card.coldStorage !== '冷藏' && card.cardOrigin !== '测试卡');
 const referenceCards = window.CARD_DATA.referenceCards || [];
-const detailCards = new Map([...cards, ...referenceCards].map(card => [card.id, card]));
+const detailCards = new Map([...allCards, ...referenceCards].map(card => [card.id, card]));
+const cardsByUid = new Map([...allCards, ...referenceCards].map(card => [card.uid, card]));
 const $ = id => document.getElementById(id);
 const officialIcons = {...window.OFFICIAL_ICONS, ...window.NATION_ICONS};
 const rarityNames = {金:'精英',银:'特殊',铜:'限定',铁:'基础'};
@@ -11,7 +13,7 @@ const state = {nation:'',cost:'',type:'',rarity:'',role:'',query:'',sort:'cost-a
 let visible = cards.slice(), currentId = null, lastFocus = null, toastTimer;
 let referenceTrail = [], detailRootId = null;
 let activePage = null;
-const pageScroll = {collection: 0, intelligence: 0};
+const pageScroll = {collection: 0, intelligence: 0, monitoring: 0};
 window.history.scrollRestoration = 'manual';
 const esc = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function toast(text){$('toast').textContent=text;$('toast').hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').hidden=true,2600);}
@@ -110,7 +112,7 @@ function showDetail(id, keepTrail = false) {
  $('detailPosition').textContent = position < 0 ? '' : `${position + 1} / ${visible.length}`;
  $('previous').disabled = position <= 0;
  $('next').disabled = position < 0 || position >= visible.length - 1;
- for (const id of ['previous', 'next', 'detailPosition']) $(id).hidden = !$('intelligence').hidden;
+ for (const id of ['previous', 'next', 'detailPosition']) $(id).hidden = activePage !== 'collection';
  $('detailBack').hidden = referenceTrail.length === 0;
  $('detailBack').textContent = referenceTrail.length ? `← 返回${detailCards.get(referenceTrail.at(-1)).name}` : '';
  $('detail').scrollTop = 0;
@@ -139,18 +141,20 @@ function moveDetail(delta){const pos=visible.findIndex(c=>c.id===currentId);if(p
 function showPage(page, scroll = true) {
  const changed = activePage !== page;
  if (changed && activePage) pageScroll[activePage] = window.scrollY;
- const intelligence = page === 'intelligence';
- $('collection').hidden = intelligence;
- $('intelligence').hidden = !intelligence;
- document.body.dataset.page = intelligence ? 'intelligence' : 'collection';
- document.title = `${intelligence ? '情报' : '收藏'} · Karounds 拓展`;
- for (const [id, active] of [['collectionNav', !intelligence], ['intelligenceNav', intelligence]]) {
-  $(id).classList.toggle('active', active);
-  $(id).setAttribute('aria-current', active ? 'page' : 'false');
+ const pages = {collection:'收藏',intelligence:'情报',monitoring:'监察'};
+ if (!pages[page]) page='collection';
+ for (const name of Object.keys(pages)) $(name).hidden = name !== page;
+ document.body.dataset.page = page;
+ document.title = `${pages[page]} · Karounds 拓展`;
+ for (const name of Object.keys(pages)) {
+  const active = name === page;
+  $(name+'Nav').classList.toggle('active', active);
+  $(name+'Nav').setAttribute('aria-current', active ? 'page' : 'false');
  }
  activePage = page;
  if (scroll && changed) window.scrollTo({top: pageScroll[page], behavior: 'instant'});
- if (intelligence) layoutIntelligenceCards();
+ if (page==='intelligence') layoutIntelligenceCards();
+ if (page==='monitoring') window.CatalogMonitor?.show();
  window.scrollReveal?.refresh();
 }
 function navigatePage(page, event) {
@@ -207,15 +211,12 @@ function layoutIntelligenceCards() {
  }
 }
 function renderIntelligenceCards() {
- const groups = {
-  policyCards: ['得道多助', '山花烂漫'],
-  tongpaoCards: ['黄河河防留守兵团', '中国驻印军第 30 师', '大青山骑兵支队'],
-  aidCards: ['T-26 CN', 'B-17 AVG', 'I-16']
- };
- for (const [id, names] of Object.entries(groups)) {
-  $(id).innerHTML = names.map(name => {
-   const card = cards.find(item => item.name === name);
-   if (!card) throw new Error(`情报页缺少卡牌：${name}`);
+ const groups = window.CARD_DATA.intelligenceGroups;
+ if (!groups) throw new Error('图鉴缺少中枢 UID 引用组，请重新导入');
+ for (const [id, uids] of Object.entries(groups)) {
+  $(id).innerHTML = uids.map(uid => {
+   const card = cardsByUid.get(uid);
+   if (!card) throw new Error(`情报页缺少卡牌 UID：${uid}`);
    return `<button class="intel-card" data-intel-card="${esc(card.id)}" aria-label="查看${esc(card.name)}详情" title="${esc(card.name)}"><span class="intel-card-inner">${visual(card, true, 'intelligence')}</span></button>`;
   }).join('');
   $(id).addEventListener('click', event => {
@@ -226,9 +227,10 @@ function renderIntelligenceCards() {
 }
 $('grid').addEventListener('click',e=>{const open=e.target.closest('[data-open]');if(open)showDetail(open.dataset.open);});
 $('grid').addEventListener('error',e=>{if(e.target.tagName==='IMG'){const c=cards.find(c=>c.image===e.target.getAttribute('src')||Object.values(c.previews||{}).includes(e.target.getAttribute('src')));e.target.replaceWith(Object.assign(document.createElement('span'),{className:'missing-card',textContent:`${c?.name||'卡面'}：图片加载失败，请刷新重试`}));}},true);
-$('search').addEventListener('input',e=>{state.query=e.target.value.trim();render();});$('sort').addEventListener('change',e=>{state.sort=e.target.value;render();});$('reset').addEventListener('click',reset);$('emptyReset').addEventListener('click',reset);$('closeDetail').addEventListener('click',()=>$('detail').close());$('previous').addEventListener('click',()=>moveDetail(-1));$('next').addEventListener('click',()=>moveDetail(1));$('detail').addEventListener('close',()=>{const id=detailRootId;currentId=null;referenceTrail=[];detailRootId=null;const target=document.querySelector(`[data-open="${id}"]`);(($('intelligence').hidden?target:null)||lastFocus||$('search')).focus();});
+$('search').addEventListener('input',e=>{state.query=e.target.value.trim();render();});$('sort').addEventListener('change',e=>{state.sort=e.target.value;render();});$('reset').addEventListener('click',reset);$('emptyReset').addEventListener('click',reset);$('closeDetail').addEventListener('click',()=>$('detail').close());$('previous').addEventListener('click',()=>moveDetail(-1));$('next').addEventListener('click',()=>moveDetail(1));$('detail').addEventListener('close',()=>{const id=detailRootId;currentId=null;referenceTrail=[];detailRootId=null;const target=document.querySelector(`[data-open="${id}"]`);((activePage==='collection'?target:null)||lastFocus||$('search')).focus();});
 $('activeFilters').addEventListener('click',e=>{const tag=e.target.closest('[data-remove-key]');if(!tag)return;const key=tag.dataset.removeKey;if(key==='query'){state.query='';$('search').value='';render();}else toggleFilter(key,tag.dataset.removeValue);});
 $('intelligenceNav').addEventListener('click',event=>navigatePage('intelligence',event));
+$('monitoringNav').addEventListener('click',event=>navigatePage('monitoring',event));
 $('collectionNav').addEventListener('click',event=>navigatePage('collection',event));
 for (const link of document.querySelectorAll('a[href="#collection"]:not(#collectionNav)')) link.addEventListener('click',event=>navigatePage('collection',event));
 $('openFilters').addEventListener('click',()=>{$('filterDialogBody').appendChild($('filterPanel'));$('filterDialog').showModal();$('closeFilters').focus();});
@@ -236,10 +238,12 @@ $('closeFilters').addEventListener('click',()=>$('filterDialog').close());
 $('applyFilters').addEventListener('click',()=>$('filterDialog').close());
 $('filterDialog').addEventListener('close',()=>{$('filterHome').appendChild($('filterPanel'));$('openFilters').focus();});
 for(const d of document.querySelectorAll('dialog'))d.addEventListener('click',e=>{if(e.target!==d)return;if(d.id==='detail'){d.close();return;}const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close();});
-document.addEventListener('keydown',e=>{if($('detail').open){if(e.key==='ArrowLeft'&&$('intelligence').hidden)moveDetail(-1);if(e.key==='ArrowRight'&&$('intelligence').hidden)moveDetail(1);return;}if(e.key==='/'&&$('intelligence').hidden&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){e.preventDefault();$('search').focus();}});
+document.addEventListener('keydown',e=>{if($('detail').open){if(e.key==='ArrowLeft'&&activePage==='collection')moveDetail(-1);if(e.key==='ArrowRight'&&activePage==='collection')moveDetail(1);return;}if(e.key==='/'&&activePage==='collection'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){e.preventDefault();$('search').focus();}});
 render();
 renderIntelligenceCards();
 window.addEventListener('resize', layoutIntelligenceCards);
-window.addEventListener('hashchange',()=>showPage(window.location.hash==='#intelligence'?'intelligence':'collection'));
-window.addEventListener('popstate',()=>showPage(window.location.hash==='#intelligence'?'intelligence':'collection'));
-showPage(window.location.hash==='#intelligence'?'intelligence':'collection', false);
+function pageFromHash(){return ['intelligence','monitoring'].includes(window.location.hash.slice(1))?window.location.hash.slice(1):'collection';}
+window.CatalogActions={hasUid:uid=>cardsByUid.has(uid),openUid(uid){const card=cardsByUid.get(uid);if(card)showDetail(card.id);}};
+window.addEventListener('hashchange',()=>showPage(pageFromHash()));
+window.addEventListener('popstate',()=>showPage(pageFromHash()));
+showPage(pageFromHash(), false);
