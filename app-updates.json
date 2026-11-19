@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "b4d76ff435640f9d01e9cbabfd578687ae2b30971351553cbb49f3290519ec66",
+  "version": "a2f0c02340546526393c525695c75b235beff4d28cf5b08f634578ca67621c43",
   "files": [
     {
       "path": "cards/card-001.webp",
@@ -189,8 +189,8 @@
     },
     {
       "path": "cards/card-038.webp",
-      "hash": "98e174c5f6a2b2fc0bc80e2876221b31cb32c9de59c994ef20e7eb7add55e6d0",
-      "bytes": 2472438
+      "hash": "b57986f689d1534923338ccd32fcd7ab4c3e605cac1f521d23b8cbacb7209b33",
+      "bytes": 2472466
     },
     {
       "path": "cards/card-039.webp",
@@ -999,13 +999,13 @@
     },
     {
       "path": "cards/previews/card-038-360.webp",
-      "hash": "3e53ffac0520854651bc69077718243e0a746f53331e5cda0b4892c25b1dd581",
-      "bytes": 64310
+      "hash": "3de330e53cf3aa9f4d556a8751a56e0b0d60640df171adde712bbe06d423b7ac",
+      "bytes": 64248
     },
     {
       "path": "cards/previews/card-038-720.webp",
-      "hash": "3c98ae7ac4ef098816757f4decef285e45a9f546d08b8ab7f2b8a0b483a9c48e",
-      "bytes": 193034
+      "hash": "3d52ac9cdfa9ec7f206f2f12673f4fad96b8fa3e031600de6d5526040d809a93",
+      "bytes": 193078
     },
     {
       "path": "cards/previews/card-039-360.webp",
