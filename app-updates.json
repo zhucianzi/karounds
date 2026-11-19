@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "742fd133c2320e386253a6fe0c51d5833201c76c3c39b1c7b1818d458e97bde6",
+  "version": "b4d76ff435640f9d01e9cbabfd578687ae2b30971351553cbb49f3290519ec66",
   "files": [
     {
       "path": "cards/card-001.webp",
@@ -1969,8 +1969,8 @@
     },
     {
       "path": "data.js",
-      "hash": "17cd59bca4d7dc4789d6644d471fd55becfc6cfc4a1c627505fec1728cbe38ab",
-      "bytes": 127923
+      "hash": "a505ed346d8dd89d536750ad207110be0dece47d25689a87967968ddaae5a2bb",
+      "bytes": 127922
     }
   ]
 }
