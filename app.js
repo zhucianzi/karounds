@@ -1,7 +1,10 @@
 /* UID identities and card fields come from the confirmed hub projection. */
 const allCards = window.CARD_DATA.cards;
-const cards = allCards.filter(card => card.coldStorage !== '冷藏' && card.cardOrigin !== '测试卡');
 const referenceCards = window.CARD_DATA.referenceCards || [];
+const availableInCollection = card => card.coldStorage !== '冷藏' && card.cardOrigin !== '测试卡';
+const isSpawnable = card => card.expansion === '仅生成';
+const cards = allCards.filter(card => availableInCollection(card) && !isSpawnable(card));
+const spawnableCards = [...allCards, ...referenceCards].filter(card => availableInCollection(card) && isSpawnable(card));
 const detailCards = new Map([...allCards, ...referenceCards].map(card => [card.id, card]));
 const cardsByUid = new Map([...allCards, ...referenceCards].map(card => [card.uid, card]));
 const $ = id => document.getElementById(id);
@@ -9,7 +12,16 @@ const officialIcons = {...window.OFFICIAL_ICONS, ...window.NATION_ICONS};
 const rarityNames = {金:'精英',银:'特殊',铜:'限定',铁:'基础'};
 const rarityClasses = {金:'gold',银:'silver',铜:'bronze',铁:'iron'};
 const rarityOrder = {金:4,银:3,铜:2,铁:1};
-const state = {nation:'',cost:'',type:'',rarity:'',role:'',query:'',sort:'cost-asc'};
+const expansionIcons = {
+ '基础':'Base.svg', '澳新风暴':'OceaniaStorm.svg', '国土阵线':'Homefront.svg',
+ '海战':'NavalWarfare.svg', '血与铁':'BloodAndIron.svg', '秘密行动':'CovertOps.svg',
+ '冬季战争':'WinterWar.svg', '战友':'BrothersInArms.png', '战区':'TheatersOfWar.svg',
+ '世纪大战':'WorldAtWar.png', '军团':'Legions.svg', '突破':'Breakthrough.svg',
+ '忠诚':'Allegiance.svg', '进行曲':'March.png',
+};
+const spawnablesLabel = $('spawnablesLabel').textContent.trim();
+const spawnablesFromUrl = () => new URLSearchParams(window.location.search).get('spawnables') === 'yes';
+const state = {nation:'',cost:'',type:'',rarity:'',role:'',expansion:'',query:'',sort:'cost-asc',spawnables:spawnablesFromUrl()};
 let visible = cards.slice(), currentId = null, lastFocus = null, toastTimer;
 let referenceTrail = [], detailRootId = null;
 let activePage = null;
@@ -30,10 +42,22 @@ function filterCards(list, filters) {
   (!types.length || types.includes(card.unitType || card.type)) &&
   (!rarities.length || rarities.includes(card.rarity)) &&
   (!roles.length || roles.includes(card.role)) &&
+  (!filters.expansion || card.expansion === filters.expansion) &&
   (!filters.query || card.name.toLocaleLowerCase().includes(filters.query.toLocaleLowerCase()))
  );
 }
 function toggleFilter(key,value){const values=selections(state[key]);state[key]=values.includes(value)?values.filter(v=>v!==value).join(','):[...values,value].join(',');render();}
+function setSpawnables(enabled) {
+ if (state.spawnables === enabled) return;
+ state.spawnables = enabled;
+ const { protocol, pathname, search, hash } = window.location;
+ if (protocol === 'file:') return;
+ const query = new URLSearchParams(search);
+ if (enabled) query.set('spawnables', 'yes');
+ else query.delete('spawnables');
+ const encoded = query.toString();
+ window.history.pushState(null, '', pathname + (encoded ? '?' + encoded : '') + hash);
+}
 function kreditIcon(value){return `<svg class="kredit-icon" width="38" height="34" viewBox="0 0 38 34" aria-hidden="true"><text x="22" y="26" text-anchor="end" class="kredit-primary">${value}</text>${value==='7'?'<text x="24" y="26" class="kredit-plus">+</text>':''}<text x="26" y="14" class="kredit-k">K</text></svg>`;}
 function createFilters(id, key, values) {
  const iconChoice = ['nation', 'type', 'rarity'].includes(key);
@@ -56,6 +80,28 @@ createFilters('costFilters','cost',[0,1,2,3,4,5,6,7]);
 createFilters('typeFilters','type',['步兵','炮兵','坦克','轰炸机','战斗机','指令','反制']);
 createFilters('rarityFilters','rarity',['铁','铜','银','金']);
 createFilters('roleFilters','role',['曲线','对策']);
+const expansionPicker = $('expansionPicker');
+const expansionFilters = $('expansionFilters');
+expansionFilters.innerHTML = [['','All.svg'], ...Object.entries(expansionIcons)].map(([name, file]) =>
+ `<button type="button" class="expansion-option" data-expansion="${esc(name)}" aria-pressed="false"><img class="expansion-icon" src="ui/expansions/${file}" width="26" height="26" alt=""><span>${esc(name || '全部拓展包')}</span></button>`
+).join('');
+expansionFilters.addEventListener('click', event => {
+ const option=event.target.closest('button[data-expansion]');
+ if(!option) return;
+ state.expansion=option.dataset.expansion;
+ expansionPicker.open=false;
+ render();
+ $('expansionToggle').focus();
+});
+document.addEventListener('click', event => {
+ if(expansionPicker.open && !expansionPicker.contains(event.target)) expansionPicker.open=false;
+});
+expansionPicker.addEventListener('keydown', event => {
+ if(event.key !== 'Escape' || !expansionPicker.open) return;
+ event.preventDefault();
+ expansionPicker.open=false;
+ $('expansionToggle').focus();
+});
 function visual(c, lazy = true, context = 'grid') {
  if (!c.image) return `<div class="missing-card"><span class="missing-cost">${c.cost}<small>K</small></span><span class="missing-mark">✦</span><strong>${esc(c.name)}</strong><p>${esc(c.type)} · ${esc(c.rarity)}卡</p><small>暂无同名卡图</small></div>`;
  const preview = lazy && c.previews;
@@ -65,27 +111,35 @@ function visual(c, lazy = true, context = 'grid') {
  return `<img src="${preview ? preview['360'] : c.image}" ${preview ? `srcset="${preview['360']} 360w, ${preview['720']} 720w" sizes="${sizes}"` : ''} alt="${esc(c.name)}卡面设计稿" ${lazy ? 'loading="lazy"' : 'fetchpriority="high"'} decoding="async" width="1448" height="2034">`;
 }
 function render(){
- visible=filterCards(cards,state);
+ const pool = state.spawnables ? [...cards, ...spawnableCards] : cards;
+ visible=filterCards(pool,state);
  if(state.sort==='cost-asc')visible.sort((a,b)=>a.cost-b.cost||a.row-b.row);
  if(state.sort==='cost-desc')visible.sort((a,b)=>b.cost-a.cost||a.row-b.row);
  if(state.sort==='rarity')visible.sort((a,b)=>rarityOrder[b.rarity]-rarityOrder[a.rarity]||a.cost-b.cost);
  if(state.sort==='name')visible.sort((a,b)=>a.name.localeCompare(b.name,'zh-CN'));
  $('grid').innerHTML=visible.map(c=>`<article class="card"><button class="card-open" data-open="${c.id}" aria-label="查看${esc(c.name)}详情"><span class="card-visual">${visual(c)}</span><span class="card-caption"><strong>${esc(c.name)}</strong><small>${esc(c.costText)}</small></span></button></article>`).join('');
- $('resultCount').textContent=visible.length;$('total').textContent=cards.length;$('allCount').textContent=cards.length;$('empty').hidden=visible.length>0;
+ $('resultCount').textContent=visible.length;$('total').textContent=pool.length;$('allCount').textContent=pool.length;$('empty').hidden=visible.length>0;
+ $('spawnables').checked = state.spawnables;
  document.querySelectorAll('.pill').forEach(button => {
   const selected = selections(state[button.dataset.key]).includes(button.dataset.value);
   button.classList.toggle('selected', selected);
   const attribute = ['nation', 'type', 'rarity'].includes(button.dataset.key) ? 'aria-checked' : 'aria-pressed';
   button.setAttribute(attribute, selected);
  });
+ for(const option of document.querySelectorAll('#expansionFilters button')){
+  option.setAttribute('aria-pressed',String(option.dataset.expansion===state.expansion));
+ }
+ $('expansionSelection').textContent=state.expansion || '全部拓展包';
+ $('expansionSelectedIcon').setAttribute('src','ui/expansions/'+(expansionIcons[state.expansion] || 'All.svg'));
  const tags=[];
- for(const key of ['nation','cost','type','rarity','role'])for(const value of selections(state[key]))tags.push({key,value,label:key==='cost'?'花费：'+(value==='7'?'7+':value):key==='rarity'?value+'卡':value});
+ for(const key of ['nation','cost','type','rarity','role','expansion'])for(const value of selections(state[key]))tags.push({key,value,label:key==='cost'?'花费：'+(value==='7'?'7+':value):key==='rarity'?value+'卡':value});
+ if(state.spawnables)tags.push({key:'spawnables',value:'yes',label:spawnablesLabel});
  if(state.query)tags.push({key:'query',value:state.query,label:state.query});
  $('activeFilters').innerHTML=tags.map(t=>`<button class="filter-tag" data-remove-key="${t.key}" data-remove-value="${esc(t.value)}" aria-label="移除筛选：${esc(t.label)}">${esc(t.label)}</button>`).join('');
  $('reset').hidden=tags.length===0;$('filterCount').textContent=tags.length||'';$('mobileResultCount').textContent=visible.length;
  window.scrollReveal?.refresh();
 }
-function reset(){Object.assign(state,{nation:'',cost:'',type:'',rarity:'',role:'',query:'',sort:'cost-asc'});$('search').value='';$('sort').value='cost-asc';render();}
+function reset(){setSpawnables(false);Object.assign(state,{nation:'',cost:'',type:'',rarity:'',role:'',expansion:'',query:'',sort:'cost-asc'});$('search').value='';$('sort').value='cost-asc';render();}
 function showDetail(id, keepTrail = false) {
  const card = detailCards.get(id);
  if (!card) return;
@@ -226,9 +280,17 @@ function renderIntelligenceCards() {
  }
 }
 $('grid').addEventListener('click',e=>{const open=e.target.closest('[data-open]');if(open)showDetail(open.dataset.open);});
-$('grid').addEventListener('error',e=>{if(e.target.tagName==='IMG'){const c=cards.find(c=>c.image===e.target.getAttribute('src')||Object.values(c.previews||{}).includes(e.target.getAttribute('src')));e.target.replaceWith(Object.assign(document.createElement('span'),{className:'missing-card',textContent:`${c?.name||'卡面'}：图片加载失败，请刷新重试`}));}},true);
+$('grid').addEventListener('error',e=>{if(e.target.tagName==='IMG'){const c=visible.find(c=>c.image===e.target.getAttribute('src')||Object.values(c.previews||{}).includes(e.target.getAttribute('src')));e.target.replaceWith(Object.assign(document.createElement('span'),{className:'missing-card',textContent:`${c?.name||'卡面'}：图片加载失败，请刷新重试`}));}},true);
 $('search').addEventListener('input',e=>{state.query=e.target.value.trim();render();});$('sort').addEventListener('change',e=>{state.sort=e.target.value;render();});$('reset').addEventListener('click',reset);$('emptyReset').addEventListener('click',reset);$('closeDetail').addEventListener('click',()=>$('detail').close());$('previous').addEventListener('click',()=>moveDetail(-1));$('next').addEventListener('click',()=>moveDetail(1));$('detail').addEventListener('close',()=>{const id=detailRootId;currentId=null;referenceTrail=[];detailRootId=null;const target=document.querySelector(`[data-open="${id}"]`);((activePage==='collection'?target:null)||lastFocus||$('search')).focus();});
-$('activeFilters').addEventListener('click',e=>{const tag=e.target.closest('[data-remove-key]');if(!tag)return;const key=tag.dataset.removeKey;if(key==='query'){state.query='';$('search').value='';render();}else toggleFilter(key,tag.dataset.removeValue);});
+$('spawnables').addEventListener('change',event=>{setSpawnables(event.target.checked);render();});
+$('activeFilters').addEventListener('click',e=>{
+ const tag=e.target.closest('[data-remove-key]');
+ if(!tag)return;
+ const key=tag.dataset.removeKey;
+ if(key==='query'){state.query='';$('search').value='';render();}
+ else if(key==='spawnables'){setSpawnables(false);render();}
+ else toggleFilter(key,tag.dataset.removeValue);
+});
 $('intelligenceNav').addEventListener('click',event=>navigatePage('intelligence',event));
 $('monitoringNav').addEventListener('click',event=>navigatePage('monitoring',event));
 $('collectionNav').addEventListener('click',event=>navigatePage('collection',event));
@@ -236,7 +298,7 @@ for (const link of document.querySelectorAll('a[href="#collection"]:not(#collect
 $('openFilters').addEventListener('click',()=>{$('filterDialogBody').appendChild($('filterPanel'));$('filterDialog').showModal();$('closeFilters').focus();});
 $('closeFilters').addEventListener('click',()=>$('filterDialog').close());
 $('applyFilters').addEventListener('click',()=>$('filterDialog').close());
-$('filterDialog').addEventListener('close',()=>{$('filterHome').appendChild($('filterPanel'));$('openFilters').focus();});
+$('filterDialog').addEventListener('close',()=>{expansionPicker.open=false;$('filterHome').appendChild($('filterPanel'));$('openFilters').focus();});
 for(const d of document.querySelectorAll('dialog'))d.addEventListener('click',e=>{if(e.target!==d)return;if(d.id==='detail'){d.close();return;}const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)d.close();});
 document.addEventListener('keydown',e=>{if($('detail').open){if(e.key==='ArrowLeft'&&activePage==='collection')moveDetail(-1);if(e.key==='ArrowRight'&&activePage==='collection')moveDetail(1);return;}if(e.key==='/'&&activePage==='collection'&&!['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)){e.preventDefault();$('search').focus();}});
 render();
@@ -245,5 +307,11 @@ window.addEventListener('resize', layoutIntelligenceCards);
 function pageFromHash(){return ['intelligence','monitoring'].includes(window.location.hash.slice(1))?window.location.hash.slice(1):'collection';}
 window.CatalogActions={hasUid:uid=>cardsByUid.has(uid),openUid(uid){const card=cardsByUid.get(uid);if(card)showDetail(card.id);}};
 window.addEventListener('hashchange',()=>showPage(pageFromHash()));
-window.addEventListener('popstate',()=>showPage(pageFromHash()));
+window.addEventListener('popstate',()=>{
+ if (window.location.protocol !== 'file:') {
+  const enabled=spawnablesFromUrl();
+  if(state.spawnables!==enabled){state.spawnables=enabled;render();}
+ }
+ showPage(pageFromHash());
+});
 showPage(pageFromHash(), false);

@@ -14,9 +14,18 @@
 <div class="filter-row filter-nation"><span class="filter-label">国家</span><div class="pills" id="nationFilters" role="group" aria-label="国家筛选"></div></div><div class="filter-row filter-cost"><span class="filter-label">花费</span><div class="pills" id="costFilters" role="group" aria-label="花费筛选"></div></div>
 <div class="filter-row filter-type"><span class="filter-label">类型</span><div class="pills" id="typeFilters" role="group" aria-label="类型筛选"></div></div>
 <div class="filter-row filter-rarity"><span class="filter-label">稀有度</span><div class="pills" id="rarityFilters" role="group" aria-label="稀有度筛选"></div></div>
+<div class="filter-row filter-expansion"><span class="filter-label" id="expansionLabel">拓展包</span>
+<details class="expansion-picker" id="expansionPicker">
+<summary id="expansionToggle" aria-labelledby="expansionLabel expansionSelection"><img class="expansion-icon" id="expansionSelectedIcon" src="ui/expansions/All.svg" width="26" height="26" alt=""><span id="expansionSelection" class="sr-only">全部拓展包</span></summary>
+<div class="expansion-options" id="expansionFilters" role="group" aria-labelledby="expansionLabel"></div>
+</details></div>
 <div class="filter-row filter-search"><label class="filter-label" for="search">搜索</label><label class="search"><input id="search" type="search" placeholder="搜索卡牌" autocomplete="off" aria-label="搜索卡牌名称"><span class="search-icon" aria-hidden="true"></span></label></div>
 
 <div class="filter-row filter-role"><span class="filter-label">脱手性</span><div class="pills" id="roleFilters" role="group" aria-label="脱手性筛选"></div></div>
+<div class="filter-row filter-other" role="group" aria-labelledby="otherFiltersLabel">
+  <span class="filter-label" id="otherFiltersLabel">其他</span>
+  <label class="spawnables-option"><input id="spawnables" type="checkbox"><span id="spawnablesLabel">包括可能出现的卡牌</span></label>
+</div>
 </div><button class="mobile-filter-apply outline-button" id="applyFilters"><span>查看 <b id="mobileResultCount">125</b> 张卡牌</span></button></div></div>
 <div class="results-bar"><p aria-live="polite">找到 <strong id="resultCount">125</strong> 张卡牌<span id="allCount" hidden>125</span><span id="filteredHint" hidden></span></p><div class="active-filter-wrap"><div id="activeFilters" aria-label="已选筛选条件"></div><button id="reset" class="outline-button small-button"><span>清除筛选</span></button></div><label class="sort-label"><span class="sr-only">排序</span><select id="sort" aria-label="卡牌排序"><option value="cost-asc">花费从低到高</option><option value="cost-desc">花费从高到低</option><option value="rarity">稀有度</option><option value="name">名称</option></select></label></div>
 <div class="grid" id="grid"></div><div class="empty" id="empty" hidden><h2>没有找到卡牌</h2><button id="emptyReset" class="outline-button"><span>清除全部筛选</span></button></div>
@@ -25,7 +34,7 @@
 </main>
 
 <main id="monitoring" class="monitor-page" hidden aria-labelledby="monitorTitle">
-<header class="monitor-heading"><h1 id="monitorTitle" tabindex="-1">监察</h1><p class="scope">中国卡牌 · 援助中国 · 流亡中国</p></header>
+<header class="monitor-heading"><h1 id="monitorTitle" tabindex="-1">监察</h1><p class="scope">中国可用卡牌</p></header>
 <div class="monitor-filters"><label>拓展包 <select data-monitor="expansion" disabled><option>读取中枢中</option></select></label><button data-monitor="refresh" type="button">重新统计</button><span data-monitor="status" role="status"></span></div>
 <p data-monitor="error" role="alert" hidden></p><div data-monitor="summary" class="summary"></div><p data-monitor="coverage" class="coverage"></p><div data-monitor="charts" class="charts"></div>
 <section class="cards-section" aria-labelledby="monitorCardsTitle"><div class="section-title"><h2 id="monitorCardsTitle" data-monitor="cards-title">卡牌明细</h2><button data-monitor="clear-chart" type="button" hidden>查看全部</button></div><div class="table-scroll"><table><thead><tr><th>UID</th><th>卡名</th><th>国家</th><th>范围</th><th>类型</th><th>稀有度</th><th>花费</th><th>脱手性</th><th>状态</th></tr></thead><tbody data-monitor="cards"></tbody></table></div></section>

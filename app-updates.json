@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "a2f0c02340546526393c525695c75b235beff4d28cf5b08f634578ca67621c43",
+  "version": "4890bc56d6dc90ed176cc265eceff57510730892f3d7a40214a2869321b1c39e",
   "files": [
     {
       "path": "cards/card-001.webp",
@@ -69,8 +69,8 @@
     },
     {
       "path": "cards/card-014.webp",
-      "hash": "e2f4dbdfe198daf9e31ab2e1c340ae394d38a277f8e8b7a941aaa2dec315218e",
-      "bytes": 2245618
+      "hash": "ca74a597f0303f4121dd0027e03b98de4c64680dd6ecedda97599d810eef6c7a",
+      "bytes": 2245874
     },
     {
       "path": "cards/card-015.webp",
@@ -159,8 +159,8 @@
     },
     {
       "path": "cards/card-032.webp",
-      "hash": "faa3750d1b7e03eb73d3476e7f4f7ff01938bdeffdb59c599779f3e1ae3035a5",
-      "bytes": 2679510
+      "hash": "bb4c15831f3d4a47a7b3fa284bf1c2f5b6d74add575326037711d94fda91558f",
+      "bytes": 2680182
     },
     {
       "path": "cards/card-033.webp",
@@ -184,8 +184,8 @@
     },
     {
       "path": "cards/card-037.webp",
-      "hash": "7dec9f6ed3ca2346a77d3120ab5e95070ff7437781aaa514959ac50fe35d0b99",
-      "bytes": 1325092
+      "hash": "20d846065c640b177f3d69b7cbb6a9e2a392b1d89037d5653dba74ae029b3786",
+      "bytes": 1315906
     },
     {
       "path": "cards/card-038.webp",
@@ -229,8 +229,8 @@
     },
     {
       "path": "cards/card-046.webp",
-      "hash": "b6d94705471c5c5c025fe624c89bec9ea7671df2d28a365c494a00a7b0baab7d",
-      "bytes": 1921338
+      "hash": "2bbd44dadee13b851bb047dbf4baa04f97fbe562f4273a3efd087e0b466869bf",
+      "bytes": 1920912
     },
     {
       "path": "cards/card-047.webp",
@@ -249,8 +249,8 @@
     },
     {
       "path": "cards/card-050.webp",
-      "hash": "fb858f49bcecf413b3183c7a7f980af17b75b9ca5efa7d39306565dc8f24aea3",
-      "bytes": 1765970
+      "hash": "4bb803cd0aad4e39f805c44d3249ac00994a0bc8d503400cab7a6d27ca73bdea",
+      "bytes": 1767492
     },
     {
       "path": "cards/card-051.webp",
@@ -279,8 +279,8 @@
     },
     {
       "path": "cards/card-056.webp",
-      "hash": "cfef0952b034055fa60dd2f50414177bced20e428727fb1d9c25884e14099e7a",
-      "bytes": 1730468
+      "hash": "68dd4abb9906c25e5cd03ec8ff8d8ff131c49802f8f0238c5cd52836a7676957",
+      "bytes": 1728702
     },
     {
       "path": "cards/card-057.webp",
@@ -384,8 +384,8 @@
     },
     {
       "path": "cards/card-077.webp",
-      "hash": "0680e5326ba1d7844b5dd046b01cdd4604313e4479e05561bbb70cbcde1ba45a",
-      "bytes": 1801712
+      "hash": "731ab47a1ee3629f269c14e42cb1ab67d154a4e87db7380e032af273908f41f5",
+      "bytes": 1800342
     },
     {
       "path": "cards/card-078.webp",
@@ -414,8 +414,8 @@
     },
     {
       "path": "cards/card-083.webp",
-      "hash": "c6f5738f22fe72ad5d443340900f5f2eafeb316c639472a1b31d794bfd1e17e4",
-      "bytes": 2260922
+      "hash": "266700681bd76712ff4e60d4da0acffc116f7b3f18c06bdacc12d391854bc2ba",
+      "bytes": 2260298
     },
     {
       "path": "cards/card-084.webp",
@@ -449,8 +449,8 @@
     },
     {
       "path": "cards/card-090.webp",
-      "hash": "5ed97cbaeb63bc668183672402822fe0f79125cba935532cf7f50c85c206fa5f",
-      "bytes": 2072524
+      "hash": "c69d04087af353d32ed0f9230b70f8433a97d3f52d1f7309b58a0fe65555ef04",
+      "bytes": 2066894
     },
     {
       "path": "cards/card-091.webp",
@@ -484,8 +484,8 @@
     },
     {
       "path": "cards/card-097.webp",
-      "hash": "512e12f0aeba27062c301f4a320304e3a1d1b1773c839d0ca85f4c326e140ba1",
-      "bytes": 2832852
+      "hash": "c16f8dc46ecd0d663213df8ad054e1b3355f5aa1ca4d60dd906e93635ff6ff3c",
+      "bytes": 2209180
     },
     {
       "path": "cards/card-099.webp",
@@ -549,8 +549,8 @@
     },
     {
       "path": "cards/card-111.webp",
-      "hash": "cad5981050897af3a140d35b74cd9705069dd97dc115ae53dce675e8a88ba478",
-      "bytes": 1970680
+      "hash": "dc31c7368c7997e94717df1193c8608236a4cf3c33f65048d4d40d7b2d68abb5",
+      "bytes": 1971908
     },
     {
       "path": "cards/card-112.webp",
@@ -569,8 +569,8 @@
     },
     {
       "path": "cards/card-115.webp",
-      "hash": "afc522c598005a0829e4176bb22431b5025dccba0b3e3cf06b478b785611e7cf",
-      "bytes": 2680954
+      "hash": "553cd4c130898a47b78935c5c905f49929b5b79cf0a338b347c869fd745f2fdb",
+      "bytes": 2673836
     },
     {
       "path": "cards/card-116.webp",
@@ -584,8 +584,8 @@
     },
     {
       "path": "cards/card-118.webp",
-      "hash": "0ef4d834230f57a3f5b79a166617eec218df485281caef92caec523665b96774",
-      "bytes": 1996130
+      "hash": "9f3820e502fd15ca1f760e851baeef84ef3647df0e57f70e96643f74d1e2a335",
+      "bytes": 1998934
     },
     {
       "path": "cards/card-119.webp",
@@ -614,8 +614,8 @@
     },
     {
       "path": "cards/card-124.webp",
-      "hash": "59467596cc5f838d92023daf6c8462b86f3bb0122508c601736abb9771bd6619",
-      "bytes": 2213734
+      "hash": "8b49bdc2227d934a9f3e96d9957ac65a5e1038b9d8a17bd9f77dc0086c8805a1",
+      "bytes": 2190234
     },
     {
       "path": "cards/card-125.webp",
@@ -759,13 +759,13 @@
     },
     {
       "path": "cards/previews/card-014-360.webp",
-      "hash": "242a9444de92cfa20e951ef564e25d9a4cd308c4cda3bff72eee7a4e30d0b456",
-      "bytes": 57802
+      "hash": "48deefcd0687b0e3f76ff1b39356b8ce1f6fab243a0f33c271ab2023c5a05d6a",
+      "bytes": 57826
     },
     {
       "path": "cards/previews/card-014-720.webp",
-      "hash": "6c73e9d62887a9534e29786e1a7650d4bcd53bd11e383dafc662fec9d1d1b434",
-      "bytes": 155592
+      "hash": "dfc8a5e7a03adf31522254e3fe6a938bc4f0fb8610181bdaf3767e79141fc608",
+      "bytes": 155638
     },
     {
       "path": "cards/previews/card-015-360.webp",
@@ -939,13 +939,13 @@
     },
     {
       "path": "cards/previews/card-032-360.webp",
-      "hash": "90d6c6165f2f8c9aefcc013f2f23b600c50e4b38ca4d16759513ed59d0ffaf54",
-      "bytes": 69956
+      "hash": "630ed27de5a75d76bf133e5c88d05d153db272b327f383f07152859ae02adaf7",
+      "bytes": 70536
     },
     {
       "path": "cards/previews/card-032-720.webp",
-      "hash": "d1e0d71cf6683c45f63832128348b993223abfb93f192e2150222a820842ada4",
-      "bytes": 224630
+      "hash": "4ff7c74dc678319a3555c02cbf83951ef8d89bb9196a59b8b5a709e7c439bdd2",
+      "bytes": 224242
     },
     {
       "path": "cards/previews/card-033-360.webp",
@@ -989,13 +989,13 @@
     },
     {
       "path": "cards/previews/card-037-360.webp",
-      "hash": "efaeb3b2bb042ae9d5f9255109b1361df5072862c6da7cca8015cbde8e765652",
-      "bytes": 38992
+      "hash": "ceb21bef80ca1cd61a2921b9620b2645be115cddefdc97667375f87107173ecf",
+      "bytes": 38194
     },
     {
       "path": "cards/previews/card-037-720.webp",
-      "hash": "3b0432334e36ac561b708ba604f3a28f78850825d187230836fbc4c323f4dc61",
-      "bytes": 92882
+      "hash": "d30e582420b165d7d82fdf7ebd90475fe1f458bdf6dbae281af02ea51f789490",
+      "bytes": 88806
     },
     {
       "path": "cards/previews/card-038-360.webp",
@@ -1079,13 +1079,13 @@
     },
     {
       "path": "cards/previews/card-046-360.webp",
-      "hash": "554951c83745fe943924d8563d7d817df7df50ee2b0cb4da890eb2e2d39db9b0",
-      "bytes": 49544
+      "hash": "de2ff7b53c19d8061558e45f8b7f947b34b6ae835d3713e60007118c6c97afa6",
+      "bytes": 49420
     },
     {
       "path": "cards/previews/card-046-720.webp",
-      "hash": "c55929a36ce9cd554f63b4c9ee328cbb65a44974e05f65796be74fb61cab8d8e",
-      "bytes": 123874
+      "hash": "4072398ab5a6324ecc93b3bb9994a26c7c505343a280a3e4b106e101f6d3c885",
+      "bytes": 121408
     },
     {
       "path": "cards/previews/card-047-360.webp",
@@ -1119,13 +1119,13 @@
     },
     {
       "path": "cards/previews/card-050-360.webp",
-      "hash": "c0b8f2aadbf49edcbdfbaf323f9f827d71d9714f1317731b5e81058b89a90dc0",
-      "bytes": 36562
+      "hash": "2b39f5cf0f1ea25eb94e97b6efe7597f67a1996189b348446ac5e2a611753a09",
+      "bytes": 36190
     },
     {
       "path": "cards/previews/card-050-720.webp",
-      "hash": "39e7f44ad5b26a62449f9408f6e2b2dd768e5dbeda82cc60d7ced3effce6fcd6",
-      "bytes": 92702
+      "hash": "f881ea5ccad3eef3724d7658a8b2832188fb490d0ab97c3998b0681fa68d66c9",
+      "bytes": 91892
     },
     {
       "path": "cards/previews/card-051-360.webp",
@@ -1179,13 +1179,13 @@
     },
     {
       "path": "cards/previews/card-056-360.webp",
-      "hash": "550b618aa501994476a8360121724971ddbff8f48919b31682339b0432618d82",
-      "bytes": 41332
+      "hash": "c38e93942050a77f1fa5d551e1b2da3b4d19c1ba19032070b12eef08ee0663b9",
+      "bytes": 40400
     },
     {
       "path": "cards/previews/card-056-720.webp",
-      "hash": "1b04831aedc52de03327e75fef043669e291d8e264071a04d8e09c68469db8cb",
-      "bytes": 102542
+      "hash": "b67eb4e6e6e22d29b72474ca3f499066ab9a0ddf77e44bb523c78b6a47952e80",
+      "bytes": 102250
     },
     {
       "path": "cards/previews/card-057-360.webp",
@@ -1389,13 +1389,13 @@
     },
     {
       "path": "cards/previews/card-077-360.webp",
-      "hash": "a73c8ff945d02122bc1e7c0590e94dfc7a820f0a54f34753d8ce2caccd080f7c",
-      "bytes": 39472
+      "hash": "60c5d50c931bf23e5af3774032c903fb902527e572797676fb48e15c65d5dd19",
+      "bytes": 39394
     },
     {
       "path": "cards/previews/card-077-720.webp",
-      "hash": "c6ed9234e6ab9bb7861b1d701fd4466f9a834931eaf44bf75bf5cd4e56a19338",
-      "bytes": 107556
+      "hash": "bdcd59f4429b9c4989ebab1b6f5de33ba6763156e1474a06f0e2f634057985d0",
+      "bytes": 107400
     },
     {
       "path": "cards/previews/card-078-360.webp",
@@ -1449,13 +1449,13 @@
     },
     {
       "path": "cards/previews/card-083-360.webp",
-      "hash": "5bf97386e02b4599193506081c68026b6addb7e83adbff3593fe268b82a0f1b4",
-      "bytes": 58700
+      "hash": "1912e008e10fc736235ba2d2e0a1174015067e23c605b280de2b55323fd73e13",
+      "bytes": 58606
     },
     {
       "path": "cards/previews/card-083-720.webp",
-      "hash": "67779242b8872bac518dfd7897eed859d52f5786fd1774268841b482f80f629a",
-      "bytes": 158782
+      "hash": "f042e26ee264ea4a93bd717d093d42f67079de05fd8bcc5335d7d1993e4fa8bd",
+      "bytes": 158726
     },
     {
       "path": "cards/previews/card-084-360.webp",
@@ -1519,13 +1519,13 @@
     },
     {
       "path": "cards/previews/card-090-360.webp",
-      "hash": "0c084a2867dc148fa60e824e57d45ac1a27ec02878f0bebf76658d3773760287",
-      "bytes": 50100
+      "hash": "8484c11ff388729224bce55c1926db2e24ac0e7a1f2d8bd65e9c1d3ad09d1a91",
+      "bytes": 49612
     },
     {
       "path": "cards/previews/card-090-720.webp",
-      "hash": "50c9682bd29974024b7ec815db4f816cc9bf5f295236a6109ed7c4576e7f1bbc",
-      "bytes": 136668
+      "hash": "dd84a874b5de7e033630a8ec56fbf5afcdb09fc33fc49ad80f9e78a1b9075df5",
+      "bytes": 135658
     },
     {
       "path": "cards/previews/card-091-360.webp",
@@ -1589,13 +1589,13 @@
     },
     {
       "path": "cards/previews/card-097-360.webp",
-      "hash": "22632ff2772a906f5f6d0810ccfb93c24750440ace03f5f51b25e373c000f768",
-      "bytes": 63872
+      "hash": "7f59f79dad2473a7276e427f490bcb7b5e8e14de4c008affc8737d9eedc5c907",
+      "bytes": 54776
     },
     {
       "path": "cards/previews/card-097-720.webp",
-      "hash": "a088b84325906bf118f704470c4732428b9fad6d70c3b88a845271f2054334cc",
-      "bytes": 228898
+      "hash": "a9433085bd291714595a3a38a9ae5be96d3bf03e157fa3861bd94e4a271c53a9",
+      "bytes": 139882
     },
     {
       "path": "cards/previews/card-099-360.webp",
@@ -1719,13 +1719,13 @@
     },
     {
       "path": "cards/previews/card-111-360.webp",
-      "hash": "33fd9fd30bb1c0a1a4b6ee7b638eea35f8d23d9cb4d61c300da251582c9314cc",
-      "bytes": 44540
+      "hash": "206c9ce41895dde7c28aa7f25223ab1d57533d5a7a53c6e6ae39b20ab29f878c",
+      "bytes": 44576
     },
     {
       "path": "cards/previews/card-111-720.webp",
-      "hash": "2a7a4826e3898814316f9a8284c8f6fedf66cc8f335a4a4fdefaef17943342e4",
-      "bytes": 116816
+      "hash": "2e24584ef12fddd32e902fba27a25fa523c21bf9f5c9c80178f94b5317406dba",
+      "bytes": 116950
     },
     {
       "path": "cards/previews/card-112-360.webp",
@@ -1759,13 +1759,13 @@
     },
     {
       "path": "cards/previews/card-115-360.webp",
-      "hash": "dc06b1dfebc82bbd2161277c5af5c6935b48b6347a93c81aa36546999c0886ed",
-      "bytes": 67404
+      "hash": "5e14fb15507dc42cf040b733a5d02a644be180810b1e75953939b8ce79ee0853",
+      "bytes": 67846
     },
     {
       "path": "cards/previews/card-115-720.webp",
-      "hash": "43ebd5d77ba64ac1a3e893bce74fc7d4d349e5ebeab10e3c8f347b5c5d1e0eca",
-      "bytes": 216762
+      "hash": "12188b828efb1e77fd978909b17fd2ae7ac146e5d36768e8860df374c8a68ce4",
+      "bytes": 216214
     },
     {
       "path": "cards/previews/card-116-360.webp",
@@ -1789,13 +1789,13 @@
     },
     {
       "path": "cards/previews/card-118-360.webp",
-      "hash": "0e7270ffd1d6aa4645dd2b9e6d54b0ef46084650f98fc2421d1a093fcff1b25e",
-      "bytes": 48404
+      "hash": "e156e522b82f0e171c615d8daaab4970ee5b41daca4a886994b739d271c7c6db",
+      "bytes": 48604
     },
     {
       "path": "cards/previews/card-118-720.webp",
-      "hash": "267961ac1ab305d62c13506bcfd1c49e927775537e2dbaa83e1f373550a194d2",
-      "bytes": 120390
+      "hash": "9a805443db19df77f8c7de67b9e3964f8a2ea01e1cc6878b7332da3e88f8f8fa",
+      "bytes": 121016
     },
     {
       "path": "cards/previews/card-119-360.webp",
@@ -1849,13 +1849,13 @@
     },
     {
       "path": "cards/previews/card-124-360.webp",
-      "hash": "f68043afda8b00ee318052b4da60d9a084ac581da1f5911c0c60ff82b5da15f4",
-      "bytes": 53396
+      "hash": "3da031e6613bc9142f214984049c182797417d0cb7558a3ee5742d9eb0688605",
+      "bytes": 51664
     },
     {
       "path": "cards/previews/card-124-720.webp",
-      "hash": "3bdcbd7c23dc9f381286e31b709babde125935f931639a92a81c7f8cc951efc9",
-      "bytes": 135250
+      "hash": "5fb1f9e0afa39eb70bc19c7c8d74bdd215c90f04d902f6c74a0fc7649428c521",
+      "bytes": 131084
     },
     {
       "path": "cards/previews/card-125-360.webp",
@@ -1898,6 +1898,36 @@
       "bytes": 79224
     },
     {
+      "path": "cards/previews/ref-resistance-360.webp",
+      "hash": "17fed1542ca1a29a7fb9ec6c9b40d0c078353be84a07ec4fba7102fc441c4e77",
+      "bytes": 47030
+    },
+    {
+      "path": "cards/previews/ref-resistance-720.webp",
+      "hash": "02c8caa75cc5f5c1ed21d1376f0efd00abe74db0462746567c8d2dae0707b284",
+      "bytes": 123658
+    },
+    {
+      "path": "cards/previews/uid-002564-360.webp",
+      "hash": "86fd45b658757cc66341207aa8cab5bfbfbb44f90e79b1ee34c840f9c1ddd43b",
+      "bytes": 57788
+    },
+    {
+      "path": "cards/previews/uid-002564-720.webp",
+      "hash": "72f92d9d59a869e50945dab91e4c44903f5fd058c4f19c616035bcfb5fbf67ff",
+      "bytes": 155812
+    },
+    {
+      "path": "cards/previews/uid-002565-360.webp",
+      "hash": "ba7ad00baba35b47567b1bfb08222a2945ba4964f366ac3804c091cc514aa20e",
+      "bytes": 55754
+    },
+    {
+      "path": "cards/previews/uid-002565-720.webp",
+      "hash": "39860513d4e2a9bcade34285436471064bb30d0c92981013047d0f45c99cc643",
+      "bytes": 149904
+    },
+    {
       "path": "cards/previews/uid-002706-360.webp",
       "hash": "84f5aa28d3afbee93232a0491ce83a1d7518a0168e7a969bd544a3463a370343",
       "bytes": 67596
@@ -1929,13 +1959,53 @@
     },
     {
       "path": "cards/previews/uid-002710-360.webp",
-      "hash": "78503d6949c5c7f9355a2faaf59f2457749c7094b864654cd2c9bc72b5ec0f6f",
-      "bytes": 44624
+      "hash": "5ceb6843df04fab1d7bbcb7a28a36ea1824cb3af7219057e872332fddfddb250",
+      "bytes": 58608
     },
     {
       "path": "cards/previews/uid-002710-720.webp",
-      "hash": "3138eac30f8ce4222699a0133b5b857c249f83fa2cc07cdd926cfe4e78e2a977",
-      "bytes": 140750
+      "hash": "6187e3366c4750db6b6060d76a44449838ec2b2c40057e0ce3a1d3b58e12c84b",
+      "bytes": 191784
+    },
+    {
+      "path": "cards/previews/uid-002711-360.webp",
+      "hash": "a6e3b681eefa1449855a4e286ab43eba1c44dc4f686b561821054903abf6ba14",
+      "bytes": 65734
+    },
+    {
+      "path": "cards/previews/uid-002711-720.webp",
+      "hash": "8e16b51f4ecf14b0fcc0632068fe81772f2a022c055e77a7c51bd7760861be8b",
+      "bytes": 195802
+    },
+    {
+      "path": "cards/previews/uid-002712-360.webp",
+      "hash": "c4922909d9217324619dc9994ddff638e1ef97f457a55c34f0d2abc88d0fa8aa",
+      "bytes": 43750
+    },
+    {
+      "path": "cards/previews/uid-002712-720.webp",
+      "hash": "f93cb574666f92166d3dbbf22a6c442c39760b9000eb8b730e93137d0aa7b4fa",
+      "bytes": 143648
+    },
+    {
+      "path": "cards/previews/uid-002713-360.webp",
+      "hash": "75da8c15ac9a90085784e2cdac4beec7bb78d225f35b21313166660222cfa9b1",
+      "bytes": 45234
+    },
+    {
+      "path": "cards/previews/uid-002713-720.webp",
+      "hash": "a8b87ea0b55bcf2e84935a98d68335d823524dd08ca6552542c2030f61d78c18",
+      "bytes": 106654
+    },
+    {
+      "path": "cards/previews/uid-002714-360.webp",
+      "hash": "72aefd9ae5af6a4193cbfff3eef2d2b112ec1886c21e384ebc095e6100fef31d",
+      "bytes": 56632
+    },
+    {
+      "path": "cards/previews/uid-002714-720.webp",
+      "hash": "5c85872f4ace9025755f806e53706fa70f5416eb18928d5d58fce1b5b858cecc",
+      "bytes": 146580
     },
     {
       "path": "cards/ref-liberation-war.webp",
@@ -1946,6 +2016,21 @@
       "path": "cards/ref-pacification-war.webp",
       "hash": "bb160b0258703354d8e1279483992e57b6d62160b890fc63cd9aa089e8954e1d",
       "bytes": 1331620
+    },
+    {
+      "path": "cards/ref-resistance.webp",
+      "hash": "c68559cffb706be07117e7bdec94afd0bb891b9ea07adc309170fb7a97d77d25",
+      "bytes": 2710260
+    },
+    {
+      "path": "cards/uid-002564.webp",
+      "hash": "b8ef96aca86abf32d6aed5950f6c6066b86eb8c9f6b2bbb12295482767243364",
+      "bytes": 2504702
+    },
+    {
+      "path": "cards/uid-002565.webp",
+      "hash": "a20ce34480a983bd7dbf958ccf9a42eb41743affb82b92c65f0546bb9e604ec5",
+      "bytes": 2474048
     },
     {
       "path": "cards/uid-002706.webp",
@@ -1964,13 +2049,33 @@
     },
     {
       "path": "cards/uid-002710.webp",
-      "hash": "cd573d3acf396f938771b804fdd51a9935dfd607bf680839800cf97bea94e710",
-      "bytes": 2459022
+      "hash": "2aa6d5d6eed9c7b027b74fa94ed6f8986d6a1c61a779dbd2f62d6d1db1f1f0eb",
+      "bytes": 3303340
+    },
+    {
+      "path": "cards/uid-002711.webp",
+      "hash": "de987616fb7669d1fa367498e9bb7a1488982b17878a15c734b59ca925d44503",
+      "bytes": 2505492
+    },
+    {
+      "path": "cards/uid-002712.webp",
+      "hash": "0c2b20e409bd28f661ab56eade196eb19eb6eb364b0cb40dad64ca4a9c9043b1",
+      "bytes": 2481236
+    },
+    {
+      "path": "cards/uid-002713.webp",
+      "hash": "76172bb23d7e44e14307388b19bd1df703bae03a3d64d1f5b19a9cc116a5a354",
+      "bytes": 1854620
+    },
+    {
+      "path": "cards/uid-002714.webp",
+      "hash": "d6ed61daef0883e4b8ad597f49488865b838f21af164f72fb3b299c2363df38e",
+      "bytes": 2483518
     },
     {
       "path": "data.js",
-      "hash": "a505ed346d8dd89d536750ad207110be0dece47d25689a87967968ddaae5a2bb",
-      "bytes": 127922
+      "hash": "72693f10079d07b8856b125bd1ec2fcd6250bdc0d18b6206290a0806145839de",
+      "bytes": 132524
     }
   ]
 }

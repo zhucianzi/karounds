@@ -22,6 +22,70 @@
 #filterDialog #costFilters .pill { width: 45px; height: 40px; max-width: none; }
 #filterDialog .search, #filterDialog .filter-search { width: 100%; min-width: 0; }
 #filterDialog input[type="search"] { font-size: 16px; }
+.filter-other > .filter-label { font-weight: 400; }
+.spawnables-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 40px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.spawnables-option input {
+  appearance: none;
+  display: grid;
+  place-content: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  border: 2px solid var(--cream);
+  border-radius: 0;
+  background: transparent;
+  cursor: inherit;
+}
+.spawnables-option input:checked::before {
+  content: "";
+  width: 6px;
+  height: 10px;
+  border: solid var(--orange);
+  border-width: 0 2px 2px 0;
+  transform: translateY(-1px) rotate(45deg);
+}
+@media (hover: hover) {
+  .spawnables-option:hover input { border-color: var(--orange); }
+}
+.filter-expansion { flex: none; }
+.expansion-picker { position: relative; }
+.expansion-picker summary {
+  position: relative; display: flex; align-items: center; width: max-content; height: 40px;
+  padding: 0 40px 0 10px; list-style: none; cursor: pointer;
+  border: 2px solid #ebebdc; background: transparent; color: #ebebdc;
+}
+.expansion-picker summary::-webkit-details-marker { display: none; }
+.expansion-picker summary::after {
+  content: ""; position: absolute; top: calc(50% - 3px); right: 10px;
+  border: 6.5px solid transparent; border-top-color: #ebebdc;
+}
+.expansion-picker summary:hover, .expansion-picker summary:focus-visible, .expansion-picker[open] summary {
+  border-color: #dba122;
+}
+.expansion-options {
+  position: absolute; z-index: 10; top: calc(100% + 5px); inset-inline-start: 0;
+  width: max-content; max-height: 300px; overflow-y: auto; overscroll-behavior: contain;
+  border: 2px solid #ebebdc; background: #222;
+}
+.expansion-option {
+  display: flex; align-items: center; gap: 10px; width: 100%; padding: 7px 10px;
+  border: 0; background: transparent; color: #ebebdc; cursor: pointer;
+  font: 700 16px/1.4 Oswald, "Microsoft YaHei", sans-serif; text-align: start; white-space: nowrap;
+}
+.expansion-option:hover, .expansion-option:focus-visible, .expansion-option[aria-pressed="true"] {
+  color: #dba122; background: #000;
+}
+.expansion-icon { display: block; flex: 0 0 26px; object-fit: contain; }
+#filterDialog .expansion-options { position: static; margin-top: 5px; max-height: min(300px, 45dvh); }
 @media (min-width: 480px) {
   #filterDialog #costFilters { grid-template-columns: repeat(8, 45px); }
 }
