@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "cac694ba8ebf8b3781ac24c26d0a706279c4feb3a43f9e2f68eb2332298c9d6b",
+  "version": "f065f7cf295905eea8eb3a9cf605df65395b2cc66ed329677b9d4b3d213f4f11",
   "files": [
     {
       "path": "cards/card-001.webp",
@@ -144,8 +144,8 @@
     },
     {
       "path": "cards/card-029.webp",
-      "hash": "37fb93592ffe5802a6162edc916797aaad432dd3f23e941d92dd56549d98baf3",
-      "bytes": 1571436
+      "hash": "a4fb00ff8df2af938422bed497619b8c38af169389a6137ee1fb9ec2fd606bc5",
+      "bytes": 1572426
     },
     {
       "path": "cards/card-030.webp",
@@ -909,13 +909,13 @@
     },
     {
       "path": "cards/previews/card-029-360.webp",
-      "hash": "f456fa186cc290fd53522e314d3325cd3f791a5b0dd8039f3dfd016c20abdf5d",
-      "bytes": 49224
+      "hash": "4a67fe8525f1698ebf8dd04cc9c2ede49b1a72d7169aa6ec977eeb3168b1349f",
+      "bytes": 49204
     },
     {
       "path": "cards/previews/card-029-720.webp",
-      "hash": "d43823eff228e8baa1c47bc4bbb3164dee91d0a7339dc09ca6e65b80d2368cdd",
-      "bytes": 125020
+      "hash": "c66d1fd19d17e61224343bb9419dfe6bc991e65a2cb338ef6849e4d37426fbcb",
+      "bytes": 125172
     },
     {
       "path": "cards/previews/card-030-360.webp",
@@ -2059,13 +2059,13 @@
     },
     {
       "path": "cards/previews/uid-002715-360.webp",
-      "hash": "e1fe3e9fb7c920b97f314ae0e3c2906a492d53dd814c7e4fa7dcf7deb7a67241",
-      "bytes": 55106
+      "hash": "a67b3c56b58bb182144943b1956c0307219c0ec8e04d3d1b9f6f231f91d57fc1",
+      "bytes": 55152
     },
     {
       "path": "cards/previews/uid-002715-720.webp",
-      "hash": "b164e922abc0307c2c011a63c4eff1e8d411ec98d504c59faf01970d725c06f9",
-      "bytes": 176920
+      "hash": "9028457d59ff5b076414a5b3ac5286cecd81dae6f6ce39749ad3a73b5834e2fa",
+      "bytes": 176998
     },
     {
       "path": "cards/ref-liberation-war.webp",
@@ -2159,13 +2159,13 @@
     },
     {
       "path": "cards/uid-002715.webp",
-      "hash": "2c72e7c3cac3ba0cc6a91676dacf2acee30b35715780694e2305b38f054b4f2c",
-      "bytes": 2711188
+      "hash": "4c67e0d7dc47417c5f2d92612f4b952417f24c6ef6717aa1a43fdc64eb484b7b",
+      "bytes": 2712864
     },
     {
       "path": "data.js",
-      "hash": "9d16fdcac44f5f3ff7df7cf16707795d2ad47eea2a0a9114f5c28dbcfcd67570",
-      "bytes": 134840
+      "hash": "d825e57a20fec5e289d34b45a879a3db9bdf7ca64c9140e42ba0588a434a50d9",
+      "bytes": 134828
     }
   ]
 }
