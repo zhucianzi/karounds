@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "version": "afa51e337b03a2f0d9b75d729300f8cced918bbf6dd8c03fdfbccefd8778ba29",
+  "version": "cac694ba8ebf8b3781ac24c26d0a706279c4feb3a43f9e2f68eb2332298c9d6b",
   "files": [
     {
       "path": "cards/card-001.webp",
@@ -164,8 +164,8 @@
     },
     {
       "path": "cards/card-033.webp",
-      "hash": "e530380ed5eb64413429f5e83a7180c7fe7ccb0920fb127361f9ba1631c95d9c",
-      "bytes": 3369790
+      "hash": "6fa2e8bb18342669a503c0d64a69a2afe5e2a7bef5a870f613e153782599de74",
+      "bytes": 3007396
     },
     {
       "path": "cards/card-034.webp",
@@ -949,13 +949,13 @@
     },
     {
       "path": "cards/previews/card-033-360.webp",
-      "hash": "2a4fedb4b9f93331f2b140526fd4510fc431c1e161b732e3424af0c46895da82",
-      "bytes": 60180
+      "hash": "e59c17733f195543a7b0cacffe3c16812c4266a4adbf215f25a7ab73f80b881e",
+      "bytes": 74452
     },
     {
       "path": "cards/previews/card-033-720.webp",
-      "hash": "8c1fbc4f5892b42f50ec301a547f379bd72aab434337eeb5c10a52f40f30c64b",
-      "bytes": 198778
+      "hash": "a4c08255482cff77cb50eb0d81e582a4abb43ff441e4c2f3c5200d998b009537",
+      "bytes": 240778
     },
     {
       "path": "cards/previews/card-034-360.webp",
@@ -1979,13 +1979,13 @@
     },
     {
       "path": "cards/previews/uid-002706-360.webp",
-      "hash": "84f5aa28d3afbee93232a0491ce83a1d7518a0168e7a969bd544a3463a370343",
-      "bytes": 67596
+      "hash": "adebf11a89c5db4c86a990327a0384425a30e12ca45a2eae425fac0e64111fbf",
+      "bytes": 67824
     },
     {
       "path": "cards/previews/uid-002706-720.webp",
-      "hash": "4e04bfa402df4f9681a776adb3cea7d04d04cc0f2c61dfd8a5c34506319fe1c4",
-      "bytes": 205238
+      "hash": "15392b463dd35397f6498cc42d9a9d89e7e67164fe8a81ef0462b49152973664",
+      "bytes": 205758
     },
     {
       "path": "cards/previews/uid-002707-360.webp",
@@ -2058,6 +2058,16 @@
       "bytes": 146580
     },
     {
+      "path": "cards/previews/uid-002715-360.webp",
+      "hash": "e1fe3e9fb7c920b97f314ae0e3c2906a492d53dd814c7e4fa7dcf7deb7a67241",
+      "bytes": 55106
+    },
+    {
+      "path": "cards/previews/uid-002715-720.webp",
+      "hash": "b164e922abc0307c2c011a63c4eff1e8d411ec98d504c59faf01970d725c06f9",
+      "bytes": 176920
+    },
+    {
       "path": "cards/ref-liberation-war.webp",
       "hash": "91ad5e98a7c596b23a2fc6d82728c83444c13ab603cf1417c06bebaa56eb256f",
       "bytes": 2852414
@@ -2109,8 +2119,8 @@
     },
     {
       "path": "cards/uid-002706.webp",
-      "hash": "6aa499976e06e89d8f74b09f9d1c5adf6f94c9d173cc38cc30ccbc5cfcfc402a",
-      "bytes": 2511336
+      "hash": "84afa9379d2534d33b0148fd83a246f3ff4bf8d76b33c7e01bf06d3c9da4a33e",
+      "bytes": 2513342
     },
     {
       "path": "cards/uid-002707.webp",
@@ -2148,9 +2158,14 @@
       "bytes": 2483518
     },
     {
+      "path": "cards/uid-002715.webp",
+      "hash": "2c72e7c3cac3ba0cc6a91676dacf2acee30b35715780694e2305b38f054b4f2c",
+      "bytes": 2711188
+    },
+    {
       "path": "data.js",
-      "hash": "6d958ecbf0cac8c448d6914cfaca8b8363f1345ebbca4c3d2b656286ecbb25af",
-      "bytes": 135102
+      "hash": "9d16fdcac44f5f3ff7df7cf16707795d2ad47eea2a0a9114f5c28dbcfcd67570",
+      "bytes": 134840
     }
   ]
 }
