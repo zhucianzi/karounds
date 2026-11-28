@@ -265,20 +265,39 @@ function layoutIntelligenceCards() {
  }
 }
 function renderIntelligenceCards() {
- const groups = window.CARD_DATA.intelligenceGroups;
- if (!groups) throw new Error('图鉴缺少中枢 UID 引用组，请重新导入');
- for (const [id, uids] of Object.entries(groups)) {
-  $(id).innerHTML = uids.map(uid => {
+ const sections = window.CARD_DATA.intelligenceSections;
+ if (!Array.isArray(sections)) throw new Error('图鉴缺少情报条目，请重新导入');
+ $('intelligenceSections').innerHTML = sections.map(({id, title, cardsLabel, paragraphs, cards}, index) => {
+  const reversed = index % 2 === 1;
+  const position = reversed ? 'ImageBlock_top__kGstN ImageBlock_reverse__nDSFP' : 'ImageBlock_middle__kCLgS';
+  const titleId = `intel-title-${esc(id)}`;
+  const body = paragraphs.map(parts => `<p>${parts.map(part =>
+   typeof part === 'string' ? esc(part) : `<strong>${esc(part.strong)}</strong>`
+  ).join('')}</p>`).join('');
+  const examples = cards.map(uid => {
    const card = cardsByUid.get(uid);
    if (!card) throw new Error(`情报页缺少卡牌 UID：${uid}`);
    return `<button class="intel-card" data-intel-card="${esc(card.id)}" aria-label="查看${esc(card.name)}详情" title="${esc(card.name)}"><span class="intel-card-inner">${visual(card, true, 'intelligence')}</span></button>`;
   }).join('');
-  $(id).addEventListener('click', event => {
-   const button = event.target.closest('[data-intel-card]');
-   if (button) showDetail(button.dataset.intelCard);
-  });
- }
+  return `<section class="intel-section ImageBlock_block__2z4at ImageBlock_behind__r4ZPt ${position} ImageBlock_box__dSGJq ImageBlock_relative__WorPC" aria-labelledby="${titleId}">
+  <div class="ImageBlock_block__segment__SkQ1P"><div class="ImageBlock_block__container__aKYa3">
+    <div class="ImageBlock_block__row__j4egy"><div class="ImageBlock_block__col__gQgsF"><div class="ImageBlock_block__layout__ZgEZN">
+      <div class="ImageBlock_block__contentCol__pYH_w"><div class="intel-copy ImageBlock_block__content__aJdqd">
+        <h2 class="ImageBlock_block__title__lobvY" id="${titleId}">${esc(title)}</h2>
+        <div class="intel-body">${body}</div>
+      </div></div>
+      <div class="ImageBlock_block__imageCol__SYdaV"><div class="ImageBlock_block__image__8n3cc">
+        <div class="intel-fan" data-align="${reversed ? 'left' : 'right'}" role="group" aria-label="${esc(cardsLabel)}">${examples}</div>
+      </div></div>
+    </div></div></div>
+  </div></div>
+</section>`;
+ }).join('');
 }
+$('intelligenceSections').addEventListener('click', event => {
+ const button = event.target.closest('[data-intel-card]');
+ if (button) showDetail(button.dataset.intelCard);
+});
 $('grid').addEventListener('click',e=>{const open=e.target.closest('[data-open]');if(open)showDetail(open.dataset.open);});
 $('grid').addEventListener('error',e=>{if(e.target.tagName==='IMG'){const c=visible.find(c=>c.image===e.target.getAttribute('src')||Object.values(c.previews||{}).includes(e.target.getAttribute('src')));e.target.replaceWith(Object.assign(document.createElement('span'),{className:'missing-card',textContent:`${c?.name||'卡面'}：图片加载失败，请刷新重试`}));}},true);
 $('search').addEventListener('input',e=>{state.query=e.target.value.trim();render();});$('sort').addEventListener('change',e=>{state.sort=e.target.value;render();});$('reset').addEventListener('click',reset);$('emptyReset').addEventListener('click',reset);$('closeDetail').addEventListener('click',()=>$('detail').close());$('previous').addEventListener('click',()=>moveDetail(-1));$('next').addEventListener('click',()=>moveDetail(1));$('detail').addEventListener('close',()=>{const id=detailRootId;currentId=null;referenceTrail=[];detailRootId=null;const target=document.querySelector(`[data-open="${id}"]`);((activePage==='collection'?target:null)||lastFocus||$('search')).focus();});
